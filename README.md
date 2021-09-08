@@ -9,4 +9,4 @@ I parametri che vorrei utilizzare sono:
 - Lunghezza della maniglia
 - Raggio delle ruote
 
-![alt text](https://github.com/NataleConsalvi/homeworktpa-nc/blob/main/bozzadevice.svg.svg)
+![alt text](https://github.com/NataleConsalvi/homeworktpa-nc/blob/main/bozzadevice.svg)
