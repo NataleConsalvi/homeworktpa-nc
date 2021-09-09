@@ -39,6 +39,6 @@
 
   <circle cx="475" cy="450" r="20" stroke="black" stroke-width="3" fill="grey" />
 
-  <circle cx="475" cy="200" r="10" stroke="black" stroke-width="3" fill="grey" />
+  <circle cx="475" cy="200" r="12" stroke="black" stroke-width="3" fill="grey" />
 
 </svg>
