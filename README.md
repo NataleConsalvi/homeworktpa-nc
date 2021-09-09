@@ -12,4 +12,4 @@ I parametri che vorrei utilizzare sono:
 
 Inoltre è stata aggiunta nel file .svg anche la quotatura delle parti della valigia ed è stata inserita una rotazione di 45° dell'asta e della maniglia di quest'ultima.
 
-![alt text](https://github.com/NataleConsalvi/homeworktpa-nc/blob/main/bozzadevice.svg.svg)
+![alt text](https://github.com/NataleConsalvi/homeworktpa-nc/blob/dev/bozzadevice.svg)
