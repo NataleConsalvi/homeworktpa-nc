@@ -4,9 +4,13 @@
   
   
   <g transform = "rotate(45, 475, 200)">
+  <text  x="475" y="50" fill='black' dominant-baseline='middle' text-anchor='middle'>20</text>
+  <rect  x="442.5" y="60" width="65" height="3" style="stroke-width:0;stroke:rgb(200,200,200)" />
   <rect  x="442.5" y="80" width="65" height="20" style="fill:rgb(200,200,0);stroke-width:3;stroke:rgb(0,0,0)" />
-  
-  <rect  x="462.5" y="100" width="25" height="100" style="fill:rgb(200,200,200);stroke-width:2;stroke:rgb(0,0,0)" />    
+
+  <text  x="422.5" y="150" fill='black' dominant-baseline='middle' text-anchor='middle' transform ="rotate(270,422.5,150)">100</text>
+  <rect  x="432.5" y="100" width="3" height="100" style="stroke-width:0;stroke:rgb(200,200,200)" />
+  <rect  x="462.5" y="100" width="25" height="100" style="fill:rgb(200,200,200);stroke-width:2;stroke:rgb(0,0,0)" />   
   </g>
 
   <defs>
@@ -16,9 +20,11 @@
     </linearGradient>
   </defs>
 
+  <text  x="270" y="325" fill='black' dominant-baseline='middle' text-anchor='middle' transform ="rotate(270,270,325)" >250</text>
   <rect  x="285" y="200" width="3" height="250" style="stroke-width:0;stroke:rgb(0,0,0)" />
 
   <g transform = "rotate(270,325,490)" >
+  <text  x="310" y="565" fill='black' dominant-baseline='middle' text-anchor='middle' transform ="rotate(90,310,565)">150</text>
   <rect  x="325" y="490" width="3" height="150" style="stroke-width:0;stroke:rgb(200,200,200)" />  
   </g>
 
@@ -27,6 +33,7 @@
   <circle cx="325" cy="450" r="20" stroke="black" stroke-width="3" fill="grey" />
 
   <g transform = "rotate(180,515,450)" >
+  <text  x="505" y="460" fill='black' dominant-baseline='middle' text-anchor='middle' transform ="rotate(270,505,460)">20</text>
   <rect  x="515" y="450" width="3" height="20" style="stroke-width:0;stroke:rgb(200,200,200)" />  
   </g>
 
