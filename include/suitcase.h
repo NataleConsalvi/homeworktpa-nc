@@ -82,26 +82,14 @@ void nats_setextreme(NatsSuitcase* Suitcase);
  * Control if suitcase's position is in the background
  * 
  *  Return int about the type of error:
- *      1 = l'estremo sinistro è fuori dal file
- *      2 = l'estremo destro è fuori dal file
- *      3 = l'estremo superiore è fuori dal file
- *      4 = l'estremo inferiore è fuori dal file
+ *      1 =  extreme left point is out of the file
+ *      2 =  extreme right point is out of the file
+ *      3 =  extreme high point is out of the file
+ *      4 =  extreme low point is out of the file
  *  Return 0 if the position of suitcase is in the limits
 **/
 int nats_controllposition(NatsSuitcase* Suitcase);
 
-/**
- * Control if suitcase's dimensions respect the constraints
- * 
- *  Return int about the type of error:
- *      1 = le dimensioni inserite sono negative o nulle
- *      2 = le ruote sono troppo grandi rispetto al corpo della valigia
- *      3 = le ruote sono troppo piccole rispetto al corpo della valigia
- *      4 = l'altezza dell'asta è maggiore dell'altezza del corpo della valigia
- *      5 = l'altezza dell'asta è molto più piccola dell'altezza del corpo della valigia
- *  Return 0 if the dimensions of suitcase are in the constraints
-**/
-//int nats_controlldimensions(NatsSuitcase* Suitcase);
 
 string nats_svg_handle(NatsSuitcase* Suitcase);
 string nats_svg_pole(NatsSuitcase* Suitcase);
