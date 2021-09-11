@@ -76,6 +76,9 @@ NatsSuitcase* nats_init();
 **/
 void nats_setparameters(float x, float y, float wb, float hb, float hp, float wh, float rw, float angle, NatsSuitcase* Suitcase);
 
+/**
+ * Set extreme points of suitcase
+**/
 void nats_setextreme(NatsSuitcase* Suitcase);
 
 /**

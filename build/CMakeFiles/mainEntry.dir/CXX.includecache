@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/suitcase.h
+iostream
+-
+string.h
+-
+cmath
+-
+
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/main.cpp
+iostream
+-
+string
+-
+fstream
+-
+streambuf
+-
+sstream
+-
+suitcase.h
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/suitcase.h
+
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/src/Suitcase.cpp
+iostream
+-
+string.h
+-
+cmath
+-
+fstream
+-
+streambuf
+-
+sstream
+-
+suitcase.h
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/src/suitcase.h
+
