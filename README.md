@@ -1,16 +1,15 @@
 # Homework 1 - TPA - Natale Consalvi
 ## Device: Valigia
 
-In questo homework vorrei realizzare il mio device valigia, del quale allego una bozza, tramite file .svg.
+In questo homework viene realizzato il device valigia tramite file .svg.
   
-I parametri che vorrei utilizzare sono:
+I parametri utilizzati sono:
 - Altezza del corpo
 - Larghezza del corpo
 - Altezza dell'asta
 - Larghezza della maniglia
 - Raggio delle ruote
 - Angolo compreso tra il corpo e l'asta
-
 
 Inoltre è stata aggiunta nel file .svg anche la quotatura delle parti della valigia ed è stata inserita una rotazione di 45° dell'asta e della maniglia di quest'ultima.
 

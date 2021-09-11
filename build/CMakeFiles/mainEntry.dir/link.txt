@@ -1,0 +1,1 @@
+/usr/bin/x86_64-linux-gnu-g++-7  -g   CMakeFiles/mainEntry.dir/main.cpp.o CMakeFiles/mainEntry.dir/src/Suitcase.cpp.o  -o mainEntry 

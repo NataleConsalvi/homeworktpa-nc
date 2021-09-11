@@ -1,0 +1,6 @@
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/build/CMakeFiles/rebuild_cache.dir
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/build/CMakeFiles/mainEntry.dir
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/build/CMakeFiles/edit_cache.dir
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/build/tests/CMakeFiles/rebuild_cache.dir
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/build/tests/CMakeFiles/catch2Test.dir
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/build/tests/CMakeFiles/edit_cache.dir
