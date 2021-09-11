@@ -93,6 +93,29 @@ void nats_setextreme(NatsSuitcase* Suitcase);
 **/
 int nats_controllposition(NatsSuitcase* Suitcase);
 
+/**
+ * Control if suitcase's dimensions respect the constrains
+ * 
+ *  Return int about the type of error:
+ *      1 =  height of the pole is greater than the height of the body
+ *      2 =  width of the handle is greater than the width of the body
+ *      3 =  width of the pole is greater than the width of the handle
+ *      4 =  radius of the wheels is greater than the half of the width of the body
+ *  Return 0 if the dimensions of suitcase is in the limits
+**/
+int nats_controlldimension(NatsSuitcase* Suitcase);
+
+/**
+ * Control if the handle touch the suitcase
+ * 
+ *  Return int about the type of error:
+ *      1 =  handle touch the wheel
+ *      2 =  handle touch the body
+ *  Return 0 if the dimensions of suitcase is in the limits
+**/
+int nats_controllhandle(NatsSuitcase* Suitcase);
+
+
 
 string nats_svg_handle(NatsSuitcase* Suitcase);
 string nats_svg_pole(NatsSuitcase* Suitcase);

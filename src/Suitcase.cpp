@@ -108,10 +108,10 @@ void nats_setextreme(NatsSuitcase* Suitcase){
     }
 
     //Extreme low point beetween extreme low point of wheels and extreme low poin of handle
-    if(Suitcase->wheelsx.ys_wheel < Suitcase->handle.yad_handle){
+    if(Suitcase->y_suitcase < Suitcase->handle.yad_handle){
         esx = Suitcase->handle.yad_handle;
     }else{
-        esx = Suitcase->wheelsx.ys_wheel;
+        esx = Suitcase->y_suitcase;
     }
 
     Suitcase->x_edx = edx;
@@ -142,6 +142,57 @@ int nats_controllposition(NatsSuitcase* Suitcase){
         }
     }
 }
+
+
+
+int nats_controlldimension(NatsSuitcase* Suitcase){
+    int i = 0;
+
+    if((Suitcase->pole.h_pole + Suitcase->handle.h_handle) > Suitcase->body.h_body){
+        return i = 1;
+    }else{
+        if(Suitcase->handle.w_handle > Suitcase->body.w_body){
+            return i = 2;
+        }else{
+            if(Suitcase->pole.w_pole > Suitcase->handle.w_handle){
+                return i = 3;
+            }else{
+                if(Suitcase->wheelsx.r_wheel > (Suitcase->body.w_body / 2)){
+                    return i = 4;
+                }else{
+                    return i = 0;
+                }
+            }
+        }
+    }
+}
+
+int nats_controllhandle(NatsSuitcase* Suitcase){
+    int i = 0;
+    if(Suitcase->angle <= 180){
+
+        if(Suitcase->handle.ybd_handle > Suitcase->wheeldx.ya_wheel){
+            if(Suitcase->handle.xbd_handle < Suitcase->wheeldx.xd_wheel){
+                return i = 1;
+            }
+        }else{
+            if(Suitcase->handle.xbd_handle < Suitcase->body.xad_body){
+                return i = 2;
+            }
+            if(Suitcase->handle.xad_handle < Suitcase->wheeldx.xd_wheel){
+                return i = 1;
+            }
+        }
+
+    }else{
+        if(Suitcase->handle.ybs_handle > Suitcase->body.yad_body){
+            return i = 2;
+        }
+
+    }
+    return i = 0;
+}
+
 
 
 string nats_svg_handle(NatsSuitcase* Suitcase){

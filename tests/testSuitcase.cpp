@@ -1,7 +1,7 @@
 #include "catch2/catch2.hpp"
 #include "suitcase.h"
 
-
+/*
 TEST_CASE("Inizialized", "[suitcase]") {
 
     NatsSuitcase* device = nats_init();
@@ -10,3 +10,4 @@ TEST_CASE("Inizialized", "[suitcase]") {
     REQUIRE(device->pole.h_pole == 1);
 
 }
+*/
