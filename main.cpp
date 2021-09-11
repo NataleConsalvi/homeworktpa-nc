@@ -57,20 +57,48 @@ void position_error(int i){
     }
 }
 
+void dimension_error(int i){
+
+    if(i == 1){
+        std::cout << "Error: height of the pole is greater than the height of the body" << endl;
+    }else{
+        if(i == 2){
+            std::cout << "Error: width of the handle is greater than the width of the body" << endl;
+        }else{
+            if(i == 3){
+                std::cout << "Error: width of the pole is greater than the width of the handle" << endl;
+            }else{
+                if(i == 4){
+                    std::cout << "Error: radius of the wheels is greater than the half of the width of the body" << endl;
+                }else{
+                    std::cout << endl;
+                }
+                
+            }
+        }
+    }
+}
+
+
 int main() {
 
     float x, y, hp, rw, wb, wh, hb, angle;
 
     NatsSuitcase* device = nats_init();
 
-    int i;
+    int i, j;
     do{
         richieste_utente(x, y, wb, hb, hp, wh, rw, angle);
         nats_setparameters(x, y, wb, hb, hp, wh, rw, angle, device);
         nats_setextreme(device);
         i = nats_controllposition(device);
         position_error(i);
-    }while(i != 0);
+        j = nats_controlldimension(device);
+        dimension_error(j);
+
+    }while(i != 0 || j != 0);
+
+    
 
     string s = nats_svg(device);
 
