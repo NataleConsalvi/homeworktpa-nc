@@ -1,0 +1,27 @@
+[
+{
+  "directory": "/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7   -I/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/include  -g   -std=gnu++1z -o CMakeFiles/mainEntry.dir/main.cpp.o -c /home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/main.cpp",
+  "file": "/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/main.cpp"
+},
+{
+  "directory": "/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7   -I/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/include  -g   -std=gnu++1z -o CMakeFiles/mainEntry.dir/src/Suitcase.cpp.o -c /home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/src/Suitcase.cpp",
+  "file": "/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/src/Suitcase.cpp"
+},
+{
+  "directory": "/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/build/tests",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7   -I/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/tests/../include  -g   -std=gnu++1z -o CMakeFiles/catch2Test.dir/catch2Main.cpp.o -c /home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/tests/catch2Main.cpp",
+  "file": "/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/tests/catch2Main.cpp"
+},
+{
+  "directory": "/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/build/tests",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7   -I/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/tests/../include  -g   -std=gnu++1z -o CMakeFiles/catch2Test.dir/testSuitcase.cpp.o -c /home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/tests/testSuitcase.cpp",
+  "file": "/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/tests/testSuitcase.cpp"
+},
+{
+  "directory": "/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/build/tests",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7   -I/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/tests/../include  -g   -std=gnu++1z -o CMakeFiles/catch2Test.dir/__/src/Suitcase.cpp.o -c /home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/src/Suitcase.cpp",
+  "file": "/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/src/Suitcase.cpp"
+}
+]

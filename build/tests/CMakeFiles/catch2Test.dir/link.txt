@@ -1,0 +1,1 @@
+/usr/bin/x86_64-linux-gnu-g++-7  -g   CMakeFiles/catch2Test.dir/catch2Main.cpp.o CMakeFiles/catch2Test.dir/testSuitcase.cpp.o CMakeFiles/catch2Test.dir/__/src/Suitcase.cpp.o  -o catch2Test 
