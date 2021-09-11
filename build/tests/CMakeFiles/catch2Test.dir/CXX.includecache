@@ -598,7 +598,7 @@ string.h
 cmath
 -
 
-/home/nataleconsalvi/Documents/Università/TPA/homeworkbackup/src/Suitcase.cpp
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/src/Suitcase.cpp
 iostream
 -
 string.h
@@ -612,15 +612,15 @@ streambuf
 sstream
 -
 suitcase.h
-/home/nataleconsalvi/Documents/Università/TPA/homeworkbackup/src/suitcase.h
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/src/suitcase.h
 
-/home/nataleconsalvi/Documents/Università/TPA/homeworkbackup/tests/catch2Main.cpp
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/tests/catch2Main.cpp
 catch2/catch2.hpp
-/home/nataleconsalvi/Documents/Università/TPA/homeworkbackup/tests/catch2/catch2.hpp
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/tests/catch2/catch2.hpp
 
-/home/nataleconsalvi/Documents/Università/TPA/homeworkbackup/tests/testSuitcase.cpp
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/tests/testSuitcase.cpp
 catch2/catch2.hpp
-/home/nataleconsalvi/Documents/Università/TPA/homeworkbackup/tests/catch2/catch2.hpp
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/tests/catch2/catch2.hpp
 suitcase.h
-/home/nataleconsalvi/Documents/Università/TPA/homeworkbackup/tests/suitcase.h
+/home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/tests/suitcase.h
 

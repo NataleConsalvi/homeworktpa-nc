@@ -79,6 +79,19 @@ void dimension_error(int i){
     }
 }
 
+void handle_error(int i){
+
+    if(i == 1){
+        std::cout << "Error: handle touch the right wheel" << endl;
+    }else{
+        if(i == 2){
+            std::cout << "Error: handle touch the body" << endl;
+        }else{
+            std::cout << endl;
+        }
+    }
+}
+
 
 int main() {
 
@@ -86,7 +99,7 @@ int main() {
 
     NatsSuitcase* device = nats_init();
 
-    int i, j;
+    int i, j, k;
     do{
         richieste_utente(x, y, wb, hb, hp, wh, rw, angle);
         nats_setparameters(x, y, wb, hb, hp, wh, rw, angle, device);
@@ -95,8 +108,10 @@ int main() {
         position_error(i);
         j = nats_controlldimension(device);
         dimension_error(j);
+        k = nats_controllhandle(device);
+        handle_error(k);
 
-    }while(i != 0 || j != 0);
+    }while(i != 0 || j != 0 || k != 0);
 
     
 

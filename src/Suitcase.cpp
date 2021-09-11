@@ -148,7 +148,7 @@ int nats_controllposition(NatsSuitcase* Suitcase){
 int nats_controlldimension(NatsSuitcase* Suitcase){
     int i = 0;
 
-    if(Suitcase->pole.h_pole > Suitcase->body.h_body){
+    if((Suitcase->pole.h_pole + Suitcase->handle.h_handle) > Suitcase->body.h_body){
         return i = 1;
     }else{
         if(Suitcase->handle.w_handle > Suitcase->body.w_body){
@@ -165,6 +165,32 @@ int nats_controlldimension(NatsSuitcase* Suitcase){
             }
         }
     }
+}
+
+int nats_controllhandle(NatsSuitcase* Suitcase){
+    int i = 0;
+    if(Suitcase->angle <= 180){
+
+        if(Suitcase->handle.ybd_handle > Suitcase->wheeldx.ya_wheel){
+            if(Suitcase->handle.xbd_handle < Suitcase->wheeldx.xd_wheel){
+                return i = 1;
+            }
+        }else{
+            if(Suitcase->handle.xbd_handle < Suitcase->body.xad_body){
+                return i = 2;
+            }
+            if(Suitcase->handle.xad_handle < Suitcase->wheeldx.xd_wheel){
+                return i = 1;
+            }
+        }
+
+    }else{
+        if(Suitcase->handle.ybs_handle > Suitcase->body.yad_body){
+            return i = 2;
+        }
+
+    }
+    return i = 0;
 }
 
 

@@ -105,6 +105,17 @@ int nats_controllposition(NatsSuitcase* Suitcase);
 **/
 int nats_controlldimension(NatsSuitcase* Suitcase);
 
+/**
+ * Control if the handle touch the suitcase
+ * 
+ *  Return int about the type of error:
+ *      1 =  handle touch the wheel
+ *      2 =  handle touch the body
+ *  Return 0 if the dimensions of suitcase is in the limits
+**/
+int nats_controllhandle(NatsSuitcase* Suitcase);
+
+
 
 string nats_svg_handle(NatsSuitcase* Suitcase);
 string nats_svg_pole(NatsSuitcase* Suitcase);
