@@ -108,14 +108,23 @@ int main() {
         position_error(i);
         j = nats_controlldimension(device);
         dimension_error(j);
+        //k = 0;
         k = nats_controllhandle(device);
         handle_error(k);
 
     }while(i != 0 || j != 0 || k != 0);
 
-    
+    char quote;
+    do{
+        cout << "Inserire le quote? [Y = yes || N = no] ";
+        cin >> quote;
+        if(quote != 'Y' && quote != 'N'){
+            cout << "Carattere errato!" << endl;
+        }
 
-    string s = nats_svg(device);
+    }while(quote != 'Y' && quote != 'N');
+
+    string s = nats_svg(device, quote);
 
     bool t = nats_write_file(s);
 
