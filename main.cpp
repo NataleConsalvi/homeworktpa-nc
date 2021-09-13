@@ -92,6 +92,21 @@ void handle_error(int i){
     }
 }
 
+string nats_read_from_file(){
+    string nomefile;
+
+    cout << "Inserire il nome del file da leggere! (ricorda .svg)" << endl;
+    cin >> nomefile;
+
+    string s;
+    ifstream t(nomefile);
+    stringstream buffer;
+    buffer << t.rdbuf();
+    s = buffer.str();
+
+    return s;
+}
+
 
 int main() {
 
@@ -108,7 +123,6 @@ int main() {
         position_error(i);
         j = nats_controlldimension(device);
         dimension_error(j);
-        //k = 0;
         k = nats_controllhandle(device);
         handle_error(k);
 
