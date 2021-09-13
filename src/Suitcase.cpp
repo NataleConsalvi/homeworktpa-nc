@@ -200,12 +200,8 @@ int nats_controllhandle(NatsSuitcase* Suitcase){
 
 
 string nats_svg_handle(NatsSuitcase* Suitcase){
-
-
     float xas_norotation = (Suitcase->handle.xas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.w_handle) * sin((Suitcase->angle)*M_PI/180));
-
     float yas_norotation = (Suitcase->handle.yas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.w_handle) * (1 - cos((Suitcase->angle)*M_PI/180)));
-
     string handle;
     handle += "  <rect  x=\"";
     handle += to_string(xas_norotation);
@@ -220,12 +216,8 @@ string nats_svg_handle(NatsSuitcase* Suitcase){
 }
 
 string nats_svg_pole(NatsSuitcase* Suitcase){
-
-
     float xas_norotation = (Suitcase->pole.xas_pole) - ((Suitcase->pole.h_pole)*sin((Suitcase->angle)*M_PI/180));
-
     float yas_norotation = (Suitcase->pole.yas_pole) - ((Suitcase->pole.h_pole)*(1 - cos((Suitcase->angle)*M_PI/180)));
-
     string pole;
     pole += "  <rect  x=\"";
     pole += to_string(xas_norotation);
@@ -484,20 +476,16 @@ string nats_svg_q_radius(NatsSuitcase* Suitcase){
 
 string nats_svg(NatsSuitcase* Suitcase, char c){
     string svg;
-    svg += "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n";
+    svg += "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n";                    //header
     svg += "\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"600\">\n";
+
     svg += nats_svg_rotation(Suitcase);
-    //svg += nats_svg_q_handle(Suitcase);
-    //svg += nats_svg_q_pole(Suitcase);
     svg += nats_svg_handle(Suitcase);
     svg += "  \n";
     svg += nats_svg_pole(Suitcase);
     svg += "  </g>";                    //end rotation
     svg += "  \n";
     svg += nats_svg_gradient();
-    //svg += nats_svg_q_body(Suitcase);
-    //svg += "  \n";
-    //svg += nats_svg_q_radius(Suitcase);
     svg += nats_svg_body(Suitcase);
     svg += "  \n";
     svg += nats_svg_wheelsx(Suitcase);
@@ -517,7 +505,7 @@ string nats_svg(NatsSuitcase* Suitcase, char c){
         svg += nats_svg_q_radius(Suitcase);        
     }
     
-    svg += "\n</svg>";
+    svg += "\n</svg>"; //end
 
     return svg;
 

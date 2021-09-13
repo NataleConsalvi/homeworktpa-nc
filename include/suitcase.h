@@ -116,21 +116,41 @@ int nats_controlldimension(NatsSuitcase* Suitcase);
 int nats_controllhandle(NatsSuitcase* Suitcase);
 
 
-
+/**
+ * Functions for the construction of svg files of the various parts:
+ *  Handle
+ *  Pole
+ *  Body
+ *  Wheels and junction
+**/
 string nats_svg_handle(NatsSuitcase* Suitcase);
 string nats_svg_pole(NatsSuitcase* Suitcase);
-string nats_svg_gradient();
 string nats_svg_body(NatsSuitcase* Suitcase);
 string nats_svg_wheelsx(NatsSuitcase* Suitcase);
 string nats_svg_wheeldx(NatsSuitcase* Suitcase);
 string nats_svg_junction(NatsSuitcase* Suitcase);
+
+/**
+ * Function for the construction of svg file about the rotation of the group handle + pole
+**/
 string nats_svg_rotation(NatsSuitcase* Suitcase);
 
+/**
+ * Function for the construction of svg file about the color of the body
+**/
+string nats_svg_gradient();
+
+/**
+ * Functions for the construction of svg files of the dimensions and the text of the various parts
+**/
 string nats_svg_q_handle(NatsSuitcase* Suitcase);
 string nats_svg_q_pole(NatsSuitcase* Suitcase);
 string nats_svg_q_body(NatsSuitcase* Suitcase);
 string nats_svg_q_radius(NatsSuitcase* Suitcase);
 
+/**
+ * Function for the construction of complete svg file with header, end and the various part of the suitcase
+**/
 string nats_svg(NatsSuitcase* Suitcase, char c);
 
 bool nats_write_file(string svg);
