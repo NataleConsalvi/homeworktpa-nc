@@ -125,7 +125,13 @@ string nats_svg_wheelsx(NatsSuitcase* Suitcase);
 string nats_svg_wheeldx(NatsSuitcase* Suitcase);
 string nats_svg_junction(NatsSuitcase* Suitcase);
 string nats_svg_rotation(NatsSuitcase* Suitcase);
-string nats_svg(NatsSuitcase* Suitcase);
+
+string nats_svg_q_handle(NatsSuitcase* Suitcase);
+string nats_svg_q_pole(NatsSuitcase* Suitcase);
+string nats_svg_q_body(NatsSuitcase* Suitcase);
+string nats_svg_q_radius(NatsSuitcase* Suitcase);
+
+string nats_svg(NatsSuitcase* Suitcase, char c);
 
 bool nats_write_file(string svg);
 
