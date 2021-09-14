@@ -8,31 +8,31 @@
 
 using namespace std;
 
-void richieste_utente(float &x, float &y, float &wb, float &hb, float &hp, float &wh, float &rw, float &angle){
+void richieste_utente(NatsParameters* param){
     std::cout << "Inserire i seguenti parametri:" << endl;
     std::cout << "1) Posizione della valigia:" << endl;
     std::cout << "   x = ";
-    std::cin >> x;
+    std::cin >> param->x;
     std::cout << "   y = ";
-    std::cin >> y;
+    std::cin >> param->y;
     std::cout << "2) Larghezza della valigia:" << endl;
     std::cout << "   wb = ";
-    std::cin >> wb;
+    std::cin >> param->wb;
     std::cout << "3) Altezza della valigia:" << endl;
     std::cout << "   hb = ";
-    std::cin >> hb;
+    std::cin >> param->hb;
     std::cout << "4) Altezza dell'asta:" << endl;
     std::cout << "   hp = ";
-    std::cin >> hp;
+    std::cin >> param->hp;
     std::cout << "5) Larghezza maniglia:" << endl;
     std::cout << "   wh = ";
-    std::cin >> wh;
+    std::cin >> param->wh;
     std::cout << "6) Raggio delle ruote:" << endl;
     std::cout << "   rw = ";
-    std::cin >> rw;
+    std::cin >> param->rw;
     std::cout << "7) Angolo inclinazione:" << endl;
     std::cout << "   angle = ";
-    std::cin >> angle;
+    std::cin >> param->angle;
 }
 
 void position_error(int i){
@@ -110,14 +110,14 @@ string nats_read_from_file(){
 
 int main() {
 
-    float x, y, hp, rw, wb, wh, hb, angle;
-
-    NatsSuitcase* device = nats_init();
+    NatsParameters* param = nats_init_param();
+    NatsSuitcase* device = nats_init_device();
 
     int i, j, k;
+
     do{
-        richieste_utente(x, y, wb, hb, hp, wh, rw, angle);
-        nats_setparameters(x, y, wb, hb, hp, wh, rw, angle, device);
+        richieste_utente(param);
+        nats_setparameters(param, device);
         nats_setextreme(device);
         i = nats_controllposition(device);
         position_error(i);
@@ -129,6 +129,7 @@ int main() {
     }while(i != 0 || j != 0 || k != 0);
 
     char quote;
+
     do{
         cout << "Inserire le quote? [Y = yes || N = no] ";
         cin >> quote;
@@ -143,4 +144,22 @@ int main() {
     bool t = nats_write_file(s);
 
     std::cout << t << endl;
+
+    string total = nats_read_from_file();
+
+    NatsParameters* param2 = nats_init_param();
+
+    nats_svg_to_param(total, param2);
+    
+    NatsSuitcase* device2 = nats_init_device();
+
+    nats_setparameters(param2, device2);
+
+    string s2 = nats_svg(device2, 'Y');
+
+    bool t2 = nats_write_file(s2);
+
+    std::cout << t2 << endl;
+    
+
 }

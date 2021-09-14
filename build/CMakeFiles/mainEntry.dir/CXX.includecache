@@ -9,7 +9,7 @@
 ../include/suitcase.h
 iostream
 -
-string.h
+string
 -
 cmath
 -
@@ -31,7 +31,7 @@ suitcase.h
 /home/nataleconsalvi/Documents/Università/TPA/homeworktpa-nc/src/Suitcase.cpp
 iostream
 -
-string.h
+string
 -
 cmath
 -
