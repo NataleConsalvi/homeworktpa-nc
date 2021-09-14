@@ -8,89 +8,103 @@
 
 using namespace std;
 
+void nats_stamp_error(int i){
+    switch(i){
+        case 0:
+
+            break;
+        case 1:
+            cout << "Error: angle if out of range [0, 360]" << endl;
+            break;
+        case 2:
+            cout << "Error: position x of suitcase is null or negative" << endl;
+            break;
+        case 3:
+            cout << "Error: position y of suitcase is null or negative" << endl;
+            break;
+        case 4:
+            cout << "Error: width of the body is null or negative" << endl;
+            break;
+        case 5:
+            cout << "Error: height of the body is null or negative" << endl;
+            break;
+        case 6:
+            cout << "Error: height of the pole is null or negative" << endl;
+            break;
+        case 7:
+            cout << "Error: width of the handle is null or negative" << endl;
+            break;
+        case 8:
+            cout << "Error: radius of the wheels is null or negative" << endl;
+            break;
+        case 9:
+            cout << "Error: extreme left point is out of the file" << endl;
+            break;      
+        case 10:
+            cout << "Error: extreme right point is out of the file" << endl;
+            break;      
+        case 11:
+            cout << "Error: extreme high point is out of the file" << endl;
+            break;
+        case 12:
+            cout << "Error: extreme low point is out of the file" << endl;
+            break;
+        case 13:
+            cout << "Error: height of the pole is greater than the height of the body" << endl;
+            break;      
+        case 14:
+            cout << "Error: width of the handle is greater than the width of the body" << endl;
+            break;      
+        case 15:
+            cout << "Error: width of the pole is greater than the width of the handle" << endl;
+            break;
+        case 16:
+            cout << "Error: radius of the wheels is greater than the half of the width of the body" << endl;
+            break;
+        case 17:
+            cout << "Error: handle touch the wheel" << endl;
+            break;
+        case 18:
+            cout << "Error: handle touch the body" << endl;
+            break;
+        default:
+
+            break;
+    }
+}
+
+
 void richieste_utente(NatsParameters* param){
-    std::cout << "Inserire i seguenti parametri:" << endl;
-    std::cout << "1) Posizione della valigia:" << endl;
-    std::cout << "   x = ";
-    std::cin >> param->x;
-    std::cout << "   y = ";
-    std::cin >> param->y;
-    std::cout << "2) Larghezza della valigia:" << endl;
-    std::cout << "   wb = ";
-    std::cin >> param->wb;
-    std::cout << "3) Altezza della valigia:" << endl;
-    std::cout << "   hb = ";
-    std::cin >> param->hb;
-    std::cout << "4) Altezza dell'asta:" << endl;
-    std::cout << "   hp = ";
-    std::cin >> param->hp;
-    std::cout << "5) Larghezza maniglia:" << endl;
-    std::cout << "   wh = ";
-    std::cin >> param->wh;
-    std::cout << "6) Raggio delle ruote:" << endl;
-    std::cout << "   rw = ";
-    std::cin >> param->rw;
-    std::cout << "7) Angolo inclinazione:" << endl;
-    std::cout << "   angle = ";
-    std::cin >> param->angle;
-    int i = nats_controlparameters(param);
-}
+    int i = 0;
+    do{
+        std::cout << "Inserire i seguenti parametri:" << endl;
+        std::cout << "1) Posizione della valigia:" << endl;
+        std::cout << "   x = ";
+        std::cin >> param->x;
+        std::cout << "   y = ";
+        std::cin >> param->y;
+        std::cout << "2) Larghezza della valigia:" << endl;
+        std::cout << "   wb = ";
+        std::cin >> param->wb;
+        std::cout << "3) Altezza della valigia:" << endl;
+        std::cout << "   hb = ";
+        std::cin >> param->hb;
+        std::cout << "4) Altezza dell'asta:" << endl;
+        std::cout << "   hp = ";
+        std::cin >> param->hp;
+        std::cout << "5) Larghezza maniglia:" << endl;
+        std::cout << "   wh = ";
+        std::cin >> param->wh;
+        std::cout << "6) Raggio delle ruote:" << endl;
+        std::cout << "   rw = ";
+        std::cin >> param->rw;
+        std::cout << "7) Angolo inclinazione:" << endl;
+        std::cout << "   angle = ";
+        std::cin >> param->angle;
+        i = nats_controlparameters(param);
+        nats_stamp_error(i);
+    }while(i != 0);
 
-void position_error(int i){
-
-    if(i == 1){
-        std::cout << "Error: extreme left point is out of the file" << endl;
-    }else{
-        if(i == 2){
-            std::cout << "Error: extreme right point is out of the file" << endl;
-        }else{
-            if(i == 3){
-                std::cout << "Error: extreme high point is out of the file" << endl;
-            }else{
-                if(i == 4){
-                    std::cout << "Error: extreme low point is out of the file" << endl;
-                }else{
-                    std::cout << endl;
-                }
-                
-            }
-        }
-    }
-}
-
-void dimension_error(int i){
-
-    if(i == 1){
-        std::cout << "Error: height of the pole is greater than the height of the body" << endl;
-    }else{
-        if(i == 2){
-            std::cout << "Error: width of the handle is greater than the width of the body" << endl;
-        }else{
-            if(i == 3){
-                std::cout << "Error: width of the pole is greater than the width of the handle" << endl;
-            }else{
-                if(i == 4){
-                    std::cout << "Error: radius of the wheels is greater than the half of the width of the body" << endl;
-                }else{
-                    std::cout << endl;
-                }
-                
-            }
-        }
-    }
-}
-
-void handle_error(int i){
-
-    if(i == 1){
-        std::cout << "Error: handle touch the right wheel" << endl;
-    }else{
-        if(i == 2){
-            std::cout << "Error: handle touch the body" << endl;
-        }else{
-            std::cout << endl;
-        }
-    }
 }
 
 string nats_read_from_file(){
@@ -121,11 +135,11 @@ int main() {
         nats_setparameters(param, device);
         nats_setextreme(device);
         i = nats_controlposition(device);
-        position_error(i);
+        nats_stamp_error(i);
         j = nats_controldimension(device);
-        dimension_error(j);
+        nats_stamp_error(j);
         k = nats_controlhandle(device);
-        handle_error(k);
+        nats_stamp_error(k);
 
     }while(i != 0 || j != 0 || k != 0);
 
@@ -145,7 +159,7 @@ int main() {
     bool t = nats_write_file(s);
 
     std::cout << t << endl;
-
+    
     string total = nats_read_from_file();
 
     NatsParameters* param2 = nats_init_param();

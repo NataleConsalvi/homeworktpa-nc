@@ -22,6 +22,44 @@ NatsSuitcase* nats_init_device(){
     return device;
 }
 
+int nats_controlparameters(NatsParameters* param){
+    int i = 0;
+    if(param->angle < 0 || param->angle>360){
+        //nats_handling_parameters(1, param);
+        return i = 1;
+    }
+    if(param->x < 0){
+        return i = 2;
+    }
+    if(param->y < 0){
+        return i = 3;
+    }
+    if(param->wb <= 0){
+        return i = 4;
+    }
+    if(param->hb <= 0){
+        return i = 5;
+    }
+    if(param->hp <= 0){
+        return i = 6;
+    }
+    if(param->wh <= 0){
+        return i = 7;
+    }
+    if(param->rw <= 0){
+        return i = 8;
+    }
+    return i;
+}
+
+
+/*
+void nats_handling_parameters(int i, NatsParameters* param){
+
+}
+*/
+
+
 void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase){
     
     float x = param->x;
@@ -78,7 +116,6 @@ void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase){
     Suitcase->junction.ya_wheel = y - rw - hb - hp/8;
 
 }
-
 
 void nats_setextreme(NatsSuitcase* Suitcase){
 
@@ -139,20 +176,19 @@ void nats_setextreme(NatsSuitcase* Suitcase){
 }
 
 
-
 int nats_controlposition(NatsSuitcase* Suitcase){
     int i = 0;
     if(Suitcase->x_esx < 0){
-        return i = 1;
+        return i = 9;
     }else{
         if(Suitcase->x_edx > 800){
-            return i = 2;
+            return i = 10;
         }else{
             if(Suitcase->y_esup < 0){
-                return i = 3;
+                return i = 11;
             }else{
                 if(Suitcase->y_einf > 600){
-                    return i = 4;
+                    return i = 12;
                 }else{
                     return i = 0;
                 }
@@ -161,22 +197,20 @@ int nats_controlposition(NatsSuitcase* Suitcase){
     }
 }
 
-
-
 int nats_controldimension(NatsSuitcase* Suitcase){
     int i = 0;
 
     if((Suitcase->pole.h_pole + Suitcase->handle.h_handle) > Suitcase->body.h_body){
-        return i = 1;
+        return i = 13;
     }else{
         if(Suitcase->handle.w_handle > Suitcase->body.w_body){
-            return i = 2;
+            return i = 14;
         }else{
             if(Suitcase->pole.w_pole > Suitcase->handle.w_handle){
-                return i = 3;
+                return i = 15;
             }else{
                 if(Suitcase->wheelsx.r_wheel > (Suitcase->body.w_body / 2)){
-                    return i = 4;
+                    return i = 16;
                 }else{
                     return i = 0;
                 }
@@ -191,53 +225,24 @@ int nats_controlhandle(NatsSuitcase* Suitcase){
 
         if(Suitcase->handle.ybd_handle > Suitcase->wheeldx.ya_wheel){
             if(Suitcase->handle.xbd_handle < Suitcase->wheeldx.xd_wheel){
-                return i = 1;
+                return i = 17;
             }
         }else{
             if(Suitcase->handle.xbd_handle < Suitcase->body.xad_body){
-                return i = 2;
+                return i = 18;
             }
             if(Suitcase->handle.xad_handle < Suitcase->wheeldx.xd_wheel){
-                return i = 1;
+                return i = 17;
             }
         }
 
     }else{
         if(Suitcase->handle.ybs_handle > Suitcase->body.yad_body){
-            return i = 2;
+            return i = 18;
         }
 
     }
     return i = 0;
-}
-
-int nats_controlparameters(NatsParameters* param){
-    int i = 0;
-    if(param->angle < 0 || param->angle>360){
-        return i = 1;
-    }
-    if(param->x < 0){
-        return i = 2;
-    }
-    if(param->y < 0){
-        return i = 3;
-    }
-    if(param->wb <= 0){
-        return i = 4;
-    }
-    if(param->hb <= 0){
-        return i = 5;
-    }
-    if(param->hp <= 0){
-        return i = 6;
-    }
-    if(param->wh <= 0){
-        return i = 7;
-    }
-    if(param->rw <= 0){
-        return i = 8;
-    }
-    return i;
 }
 
 
