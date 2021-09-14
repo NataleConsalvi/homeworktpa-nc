@@ -45,7 +45,6 @@ void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase){
     Suitcase->body.xad_body = x + (wb/2);
     Suitcase->body.yad_body = y -rw- hb;
 
-
     Suitcase->pole.w_pole = hp/5;           //default
     Suitcase->pole.h_pole = hp;
     Suitcase->pole.xas_pole = x + (wb/2) - (hp/10) + (hp * sin(anglerad));
@@ -77,7 +76,6 @@ void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase){
     Suitcase->junction.x_wheel = x + wb/2;
     Suitcase->junction.y_wheel = y - rw - hb;
     Suitcase->junction.ya_wheel = y - rw - hb - hp/8;
-
 
 }
 
@@ -512,7 +510,6 @@ string nats_svg(NatsSuitcase* Suitcase, char c){
     svg += "  \n";
     svg += "  \n";
     
-
     if(c == 'Y'){                                                                               //aggiunta quotatura
         svg += nats_svg_rotation(Suitcase);
         svg += nats_svg_q_handle(Suitcase);
@@ -537,17 +534,10 @@ bool nats_write_file(string svg){
         cout << "Scrivere il nome del file (es: nomefile.svg)" << endl;
         cin >> nome;
 
-        // Create and open a text file
-        ofstream MyFile(nome);
-
+        ofstream MyFile(nome);                                              // Create and open a text file
         string string_to_write = svg;
-
-        // Write to the file
-        MyFile << string_to_write;
-
-        // Close the file
-        MyFile.close();
-
+        MyFile << string_to_write;                                          // Write to the file
+        MyFile.close();                                                     // Close the file
         return false;
     }else{
         return true;
@@ -561,7 +551,6 @@ float nats_parse(string totale, string parse, string end, int &start_index){
     string parametro;
     size_t position = totale.find(parse, start_index);                  //position of string "parse"
                                                                         //if "parse" is not found in total return npos
-
     size_t end_parse = position + parse.length();
     size_t position_end = totale.find(end, end_parse);
 
@@ -574,7 +563,6 @@ float nats_parse(string totale, string parse, string end, int &start_index){
 
 
 void nats_svg_to_param(string totale, NatsParameters* parametri){
-    
 
     int start_index = 0;
 
@@ -588,10 +576,7 @@ void nats_svg_to_param(string totale, NatsParameters* parametri){
     parametri->wb = nats_parse(totale, "width=\"", "\" ", start_index);
     parametri->hb = nats_parse(totale, "height=\"", "\" ", start_index);
     parametri->rw = nats_parse(totale, "\" r=\"", "\"stoke=", start_index);
-    
     parametri->x = xas_body + (parametri->wb) / 2;
     parametri->y = yas_body + (parametri->hb) + (parametri->rw);
-    
-
 
 }
