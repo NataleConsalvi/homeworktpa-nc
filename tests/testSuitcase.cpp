@@ -11,3 +11,10 @@ TEST_CASE("Inizialized", "[suitcase]") {
 
 }
 */
+
+   /* test
+    string total = nats_read_from_file();
+    int a = 0;
+    float b = nats_parse(total, "rotate(", ", ", a);
+    cout << b << endl;
+   */

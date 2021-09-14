@@ -2,11 +2,23 @@
 #define SUITCASE_H
 
 #include <iostream>
-#include <string.h>
+#include <string>
 #include <cmath>
 
 using namespace std;
 
+/**
+ * A struct representing parameters to build suitcase
+**/
+struct NatsParameters {
+    float x, y;
+    float wb;
+    float hb;
+    float hp;
+    float wh;
+    float rw;
+    float angle;
+};
 
 /**
  * A struct representing the body of suitcase.
@@ -66,15 +78,21 @@ struct NatsSuitcase {
     float y_einf, y_esup;               //extreme y point
 };
 
-/**
- * Inizialize Suitcase struct
-**/
-NatsSuitcase* nats_init();
 
 /**
- * Set parameters of suitcase
+ * Inizialize struct "Parameters"
 **/
-void nats_setparameters(float x, float y, float wb, float hb, float hp, float wh, float rw, float angle, NatsSuitcase* Suitcase);
+NatsParameters* nats_init_param();
+
+/**
+ * Inizialize struct "Suitcase"
+**/
+NatsSuitcase* nats_init_device();
+
+/**
+ * Set parameters of struct "Suitcase" from struct "Parameters"
+**/
+void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase);
 
 /**
  * Set extreme points of suitcase
@@ -154,6 +172,18 @@ string nats_svg_q_radius(NatsSuitcase* Suitcase);
 string nats_svg(NatsSuitcase* Suitcase, char c);
 
 bool nats_write_file(string svg);
+
+
+/**
+ * Function that parse string "totale" to search string "parse" from "start_index" to string "end"
+ *  Return float = number between string "parse" and string "end"
+**/
+float nats_parse(string totale, string parse, string end, int &start_index);
+
+/**
+ * Function that parse string "totale" to take parameters from svg file
+**/
+void nats_svg_to_param(string totale, NatsParameters* parametri);
 
 
 #endif

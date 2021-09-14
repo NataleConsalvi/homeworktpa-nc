@@ -1,22 +1,38 @@
 #include <iostream>
-#include <string.h>
+#include <string>
 #include <cmath>
 #include <fstream>
 #include <streambuf>
 #include <sstream>
 #include "suitcase.h"
 
+
+
 #define _USE_MATH_DEFINES
 
 using namespace std;
 
-NatsSuitcase* nats_init(){
+NatsParameters* nats_init_param(){
+    NatsParameters* param = new NatsParameters;
+    return param;
+}
+
+NatsSuitcase* nats_init_device(){
     NatsSuitcase* device = new NatsSuitcase;
     return device;
 }
 
-void nats_setparameters(float x, float y, float wb, float hb, float hp, float wh, float rw, float angle, NatsSuitcase* Suitcase){
+void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase){
     
+    float x = param->x;
+    float y = param->y;
+    float wb = param->wb;
+    float hb = param->hb;
+    float hp = param->hp;
+    float wh = param->wh;
+    float rw = param->rw;
+    float angle = param->angle;
+
     Suitcase->x_suitcase = x;
     Suitcase->y_suitcase = y;
     Suitcase->angle = angle;
@@ -28,7 +44,6 @@ void nats_setparameters(float x, float y, float wb, float hb, float hp, float wh
     Suitcase->body.yas_body = y -rw- hb;
     Suitcase->body.xad_body = x + (wb/2);
     Suitcase->body.yad_body = y -rw- hb;
-
 
     Suitcase->pole.w_pole = hp/5;           //default
     Suitcase->pole.h_pole = hp;
@@ -61,7 +76,6 @@ void nats_setparameters(float x, float y, float wb, float hb, float hp, float wh
     Suitcase->junction.x_wheel = x + wb/2;
     Suitcase->junction.y_wheel = y - rw - hb;
     Suitcase->junction.ya_wheel = y - rw - hb - hp/8;
-
 
 }
 
@@ -296,76 +310,74 @@ string nats_svg_rotation(NatsSuitcase* Suitcase){
     rotation += to_string(Suitcase->body.xad_body);
     rotation += ", ";
     rotation += to_string(Suitcase->body.yad_body);
-    rotation += ")\">";
+    rotation += ")\">\n";
     return rotation;
 }
 
 string nats_svg_q_handle(NatsSuitcase* Suitcase){
+    //text + dimension of handle
+        float xas_norotation = (Suitcase->handle.xas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.w_handle) * sin((Suitcase->angle)*M_PI/180));
+        float yas_norotation = (Suitcase->handle.yas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.w_handle) * (1 - cos((Suitcase->angle)*M_PI/180)));
 
-    float xas_norotation = (Suitcase->handle.xas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.w_handle) * sin((Suitcase->angle)*M_PI/180));
+        string testo;
+        testo += "\n  <text  x=\"";
+        testo += to_string(xas_norotation + (Suitcase->handle.w_handle)/2);
+        testo += "\" y=\"";
+        testo += to_string(yas_norotation - 30);
+        testo += "\" fill='black' dominant-baseline='middle' text-anchor='middle'>";
 
-    float yas_norotation = (Suitcase->handle.yas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.w_handle) * (1 - cos((Suitcase->angle)*M_PI/180)));
+        string prova = to_string(Suitcase->handle.w_handle);
+        prova.resize(5);
 
-    string testo;
-    testo += "\n  <text  x=\"";
-    testo += to_string(xas_norotation + (Suitcase->handle.w_handle)/2);
-    testo += "\" y=\"";
-    testo += to_string(yas_norotation - 30);
-    testo += "\" fill='black' dominant-baseline='middle' text-anchor='middle'>";
+        testo += prova;
+        testo += "</text>\n";
 
-    string prova = to_string(Suitcase->handle.w_handle);
-    prova.resize(5);
-
-    testo += prova;
-    testo += "</text>\n";
-
-    testo += "  <rect  x=\"";
-    testo += to_string(xas_norotation);
-    testo += "\" y=\"";
-    testo += to_string(yas_norotation - 20);
-    testo += "\" width=\"";
-    testo += to_string(Suitcase->handle.w_handle);
-    testo +="\" height=\"";
-    testo += to_string(3);
-    testo += "\" style=\"stroke-width:0;stroke:rgb(200,200,200)\" />  \n";
+        testo += "  <rect  x=\"";
+        testo += to_string(xas_norotation);
+        testo += "\" y=\"";
+        testo += to_string(yas_norotation - 20);
+        testo += "\" width=\"";
+        testo += to_string(Suitcase->handle.w_handle);
+        testo +="\" height=\"";
+        testo += to_string(3);
+        testo += "\" style=\"stroke-width:0;stroke:rgb(200,200,200)\" />  \n";
 
     return testo;
 
 }
 
 string nats_svg_q_pole(NatsSuitcase* Suitcase){
+    //text + dimension of pole
+        float xas_norotation = (Suitcase->pole.xas_pole) - ((Suitcase->pole.h_pole)*sin((Suitcase->angle)*M_PI/180));
+        float yas_norotation = (Suitcase->pole.yas_pole) - ((Suitcase->pole.h_pole)*(1 - cos((Suitcase->angle)*M_PI/180)));
 
-    float xas_norotation = (Suitcase->pole.xas_pole) - ((Suitcase->pole.h_pole)*sin((Suitcase->angle)*M_PI/180));
+        string testo;
+        testo += "\n  <text  x=\"";
+        testo += to_string(xas_norotation  - 30);
+        testo += "\" y=\"";
+        testo += to_string(yas_norotation + Suitcase->pole.h_pole/2);
+        testo += "\" fill='black' dominant-baseline='middle' text-anchor='middle'";
+        testo += " transform =\"rotate(270,";
+        testo += to_string(xas_norotation  - 30);
+        testo += ",";
+        testo += to_string(yas_norotation + Suitcase->pole.h_pole/2);
+        testo += ")\">";
 
-    float yas_norotation = (Suitcase->pole.yas_pole) - ((Suitcase->pole.h_pole)*(1 - cos((Suitcase->angle)*M_PI/180)));
+        string prova = to_string(Suitcase->pole.h_pole);
+        prova.resize(5);
 
-    string testo;
-    testo += "\n  <text  x=\"";
-    testo += to_string(xas_norotation  - 30);
-    testo += "\" y=\"";
-    testo += to_string(yas_norotation + Suitcase->pole.h_pole/2);
-    testo += "\" fill='black' dominant-baseline='middle' text-anchor='middle'";
-    testo += " transform =\"rotate(270,";
-    testo += to_string(xas_norotation  - 30);
-    testo += ",";
-    testo += to_string(yas_norotation + Suitcase->pole.h_pole/2);
-    testo += ")\">";
+        testo += prova;
+        testo += "</text>\n";
 
-    string prova = to_string(Suitcase->pole.h_pole);
-    prova.resize(5);
-
-    testo += prova;
-    testo += "</text>\n";
-
-    testo += "  <rect  x=\"";
-    testo += to_string(xas_norotation -20);
-    testo += "\" y=\"";
-    testo += to_string(yas_norotation);
-    testo += "\" width=\"";
-    testo += to_string(3);
-    testo +="\" height=\"";
-    testo += to_string(Suitcase->pole.h_pole);
-    testo += "\" style=\"stroke-width:0;stroke:rgb(200,200,200)\" />  \n";
+        testo += "  <rect  x=\"";
+        testo += to_string(xas_norotation -20);
+        testo += "\" y=\"";
+        testo += to_string(yas_norotation);
+        testo += "\" width=\"";
+        testo += to_string(3);
+        testo +="\" height=\"";
+        testo += to_string(Suitcase->pole.h_pole);
+        testo += "\" style=\"stroke-width:0;stroke:rgb(200,200,200)\" />  \n";
 
     return testo;
 
@@ -480,12 +492,14 @@ string nats_svg(NatsSuitcase* Suitcase, char c){
     svg += "\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"600\">\n";
 
     svg += nats_svg_rotation(Suitcase);
+    svg += "  \n";
     svg += nats_svg_handle(Suitcase);
     svg += "  \n";
     svg += nats_svg_pole(Suitcase);
-    svg += "  </g>";                    //end rotation
+    svg += "  </g>";                                                                            //end rotation
     svg += "  \n";
     svg += nats_svg_gradient();
+    svg += "  \n";
     svg += nats_svg_body(Suitcase);
     svg += "  \n";
     svg += nats_svg_wheelsx(Suitcase);
@@ -493,9 +507,10 @@ string nats_svg(NatsSuitcase* Suitcase, char c){
     svg += nats_svg_wheeldx(Suitcase);
     svg += "\n";
     svg += nats_svg_junction(Suitcase);
+    svg += "  \n";
+    svg += "  \n";
     
-
-    if(c == 'Y'){
+    if(c == 'Y'){                                                                               //aggiunta quotatura
         svg += nats_svg_rotation(Suitcase);
         svg += nats_svg_q_handle(Suitcase);
         svg += nats_svg_q_pole(Suitcase);
@@ -505,7 +520,7 @@ string nats_svg(NatsSuitcase* Suitcase, char c){
         svg += nats_svg_q_radius(Suitcase);        
     }
     
-    svg += "\n</svg>"; //end
+    svg += "\n</svg>";                                                                          //end
 
     return svg;
 
@@ -519,20 +534,49 @@ bool nats_write_file(string svg){
         cout << "Scrivere il nome del file (es: nomefile.svg)" << endl;
         cin >> nome;
 
-        // Create and open a text file
-        ofstream MyFile(nome);
-
+        ofstream MyFile(nome);                                              // Create and open a text file
         string string_to_write = svg;
-
-        // Write to the file
-        MyFile << string_to_write;
-
-        // Close the file
-        MyFile.close();
-
+        MyFile << string_to_write;                                          // Write to the file
+        MyFile.close();                                                     // Close the file
         return false;
     }else{
         return true;
     }
+
+}
+
+
+float nats_parse(string totale, string parse, string end, int &start_index){
+
+    string parametro;
+    size_t position = totale.find(parse, start_index);                  //position of string "parse"
+                                                                        //if "parse" is not found in total return npos
+    size_t end_parse = position + parse.length();
+    size_t position_end = totale.find(end, end_parse);
+
+    parametro = totale.substr(end_parse, position_end);                 //substr take the string between end_parse and position_end
+
+    start_index = position_end + end.length();
+
+    return stof(parametro);                                             //Parses str interpreting its content as a float
+}
+
+
+void nats_svg_to_param(string totale, NatsParameters* parametri){
+
+    int start_index = 0;
+
+    parametri->angle = nats_parse(totale, "rotate(", ", ", start_index);
+    parametri->wh = nats_parse(totale, "width=\"", "\" height", start_index);
+    parametri->hp = nats_parse(totale, "height=\"", "\" style", start_index);
+
+    float xas_body = nats_parse(totale, "<rect  x=\"", "\" ", start_index);
+    float yas_body = nats_parse(totale, "y=\"", "\" ", start_index);
+
+    parametri->wb = nats_parse(totale, "width=\"", "\" ", start_index);
+    parametri->hb = nats_parse(totale, "height=\"", "\" ", start_index);
+    parametri->rw = nats_parse(totale, "\" r=\"", "\"stoke=", start_index);
+    parametri->x = xas_body + (parametri->wb) / 2;
+    parametri->y = yas_body + (parametri->hb) + (parametri->rw);
 
 }
