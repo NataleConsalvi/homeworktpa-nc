@@ -4,6 +4,9 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <fstream>
+#include <streambuf>
+#include <sstream>
 
 using namespace std;
 
@@ -189,7 +192,11 @@ string nats_svg_q_radius(NatsSuitcase* Suitcase);
 **/
 string nats_to_svg(NatsSuitcase* Suitcase, char c);
 
-bool nats_write_file(string svg);
+
+/**
+ * Function that create and save a file call "name" with svg string
+**/
+bool nats_write_file(string svg, string name);
 
 
 /**

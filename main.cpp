@@ -155,8 +155,13 @@ int main() {
     }while(quote != 'Y' && quote != 'N');
 
     string s = nats_to_svg(device, quote);
+    
+    string nome;
 
-    bool t = nats_write_file(s);
+    cout << "Scrivere il nome del file (es: nomefile.svg)" << endl;
+    cin >> nome;
+
+    bool t = nats_write_file(s, nome);
 
     std::cout << t << endl;
     
@@ -172,7 +177,10 @@ int main() {
 
     string s2 = nats_to_svg(device2, 'Y');
 
-    bool t2 = nats_write_file(s2);
+    string nome2;
+    cout << "Scrivere il nome del file (es: nomefile.svg)" << endl;
+    cin >> nome2;
+    bool t2 = nats_write_file(s2, nome2);
 
     std::cout << t2 << endl;
     

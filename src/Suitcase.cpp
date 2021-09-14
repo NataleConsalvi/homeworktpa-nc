@@ -53,13 +53,6 @@ int nats_controlparameters(NatsParameters* param){
 }
 
 
-/*
-void nats_handling_parameters(int i, NatsParameters* param){
-
-}
-*/
-
-
 void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase){
     
     float x = param->x;
@@ -559,15 +552,10 @@ string nats_to_svg(NatsSuitcase* Suitcase, char c){
 
 }
 
-bool nats_write_file(string svg){
+bool nats_write_file(string svg, string name){
 
     if(svg != ""){
-        string nome;
-
-        cout << "Scrivere il nome del file (es: nomefile.svg)" << endl;
-        cin >> nome;
-
-        ofstream MyFile(nome);                                              // Create and open a text file
+        ofstream MyFile(name);                                              // Create and open a text file
         string string_to_write = svg;
         MyFile << string_to_write;                                          // Write to the file
         MyFile.close();                                                     // Close the file
