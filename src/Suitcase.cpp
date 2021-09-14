@@ -374,10 +374,39 @@ string nats_svg_q_handle(NatsSuitcase* Suitcase){
 
 string nats_svg_q_pole(NatsSuitcase* Suitcase){
     //text + dimension of pole
+        string testo;
         float xas_norotation = (Suitcase->pole.xas_pole) - ((Suitcase->pole.h_pole)*sin((Suitcase->angle)*M_PI/180));
         float yas_norotation = (Suitcase->pole.yas_pole) - ((Suitcase->pole.h_pole)*(1 - cos((Suitcase->angle)*M_PI/180)));
+    if(Suitcase->angle >= 270){
+        
+        testo += "\n  <text  x=\"";
+        testo += to_string(xas_norotation + Suitcase->pole.w_pole  + 30);
+        testo += "\" y=\"";
+        testo += to_string(yas_norotation + Suitcase->pole.h_pole/2);
+        testo += "\" fill='black' dominant-baseline='middle' text-anchor='middle'";
+        testo += " transform =\"rotate(90,";
+        testo += to_string(xas_norotation + Suitcase->pole.w_pole  + 30);
+        testo += ",";
+        testo += to_string(yas_norotation + Suitcase->pole.h_pole/2);
+        testo += ")\">";
 
-        string testo;
+        string prova = to_string(Suitcase->pole.h_pole);
+        prova.resize(5);
+
+        testo += prova;
+        testo += "</text>\n";
+
+        testo += "  <rect  x=\"";
+        testo += to_string(xas_norotation + Suitcase->pole.w_pole  + 20);
+        testo += "\" y=\"";
+        testo += to_string(yas_norotation);
+        testo += "\" width=\"";
+        testo += to_string(3);
+        testo +="\" height=\"";
+        testo += to_string(Suitcase->pole.h_pole);
+        testo += "\" style=\"stroke-width:0;stroke:rgb(200,200,200)\" />  \n";
+    }else{
+
         testo += "\n  <text  x=\"";
         testo += to_string(xas_norotation  - 30);
         testo += "\" y=\"";
@@ -405,6 +434,7 @@ string nats_svg_q_pole(NatsSuitcase* Suitcase){
         testo += to_string(Suitcase->pole.h_pole);
         testo += "\" style=\"stroke-width:0;stroke:rgb(200,200,200)\" />  \n";
 
+    }
     return testo;
 
 }
