@@ -33,6 +33,7 @@ void richieste_utente(NatsParameters* param){
     std::cout << "7) Angolo inclinazione:" << endl;
     std::cout << "   angle = ";
     std::cin >> param->angle;
+    int i = nats_controlparameters(param);
 }
 
 void position_error(int i){
@@ -119,11 +120,11 @@ int main() {
         richieste_utente(param);
         nats_setparameters(param, device);
         nats_setextreme(device);
-        i = nats_controllposition(device);
+        i = nats_controlposition(device);
         position_error(i);
-        j = nats_controlldimension(device);
+        j = nats_controldimension(device);
         dimension_error(j);
-        k = nats_controllhandle(device);
+        k = nats_controlhandle(device);
         handle_error(k);
 
     }while(i != 0 || j != 0 || k != 0);
@@ -139,7 +140,7 @@ int main() {
 
     }while(quote != 'Y' && quote != 'N');
 
-    string s = nats_svg(device, quote);
+    string s = nats_to_svg(device, quote);
 
     bool t = nats_write_file(s);
 
@@ -155,7 +156,7 @@ int main() {
 
     nats_setparameters(param2, device2);
 
-    string s2 = nats_svg(device2, 'Y');
+    string s2 = nats_to_svg(device2, 'Y');
 
     bool t2 = nats_write_file(s2);
 

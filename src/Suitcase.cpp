@@ -140,7 +140,7 @@ void nats_setextreme(NatsSuitcase* Suitcase){
 
 
 
-int nats_controllposition(NatsSuitcase* Suitcase){
+int nats_controlposition(NatsSuitcase* Suitcase){
     int i = 0;
     if(Suitcase->x_esx < 0){
         return i = 1;
@@ -163,7 +163,7 @@ int nats_controllposition(NatsSuitcase* Suitcase){
 
 
 
-int nats_controlldimension(NatsSuitcase* Suitcase){
+int nats_controldimension(NatsSuitcase* Suitcase){
     int i = 0;
 
     if((Suitcase->pole.h_pole + Suitcase->handle.h_handle) > Suitcase->body.h_body){
@@ -185,7 +185,7 @@ int nats_controlldimension(NatsSuitcase* Suitcase){
     }
 }
 
-int nats_controllhandle(NatsSuitcase* Suitcase){
+int nats_controlhandle(NatsSuitcase* Suitcase){
     int i = 0;
     if(Suitcase->angle <= 180){
 
@@ -211,6 +211,34 @@ int nats_controllhandle(NatsSuitcase* Suitcase){
     return i = 0;
 }
 
+int nats_controlparameters(NatsParameters* param){
+    int i = 0;
+    if(param->angle < 0 || param->angle>360){
+        return i = 1;
+    }
+    if(param->x < 0){
+        return i = 2;
+    }
+    if(param->y < 0){
+        return i = 3;
+    }
+    if(param->wb <= 0){
+        return i = 4;
+    }
+    if(param->hb <= 0){
+        return i = 5;
+    }
+    if(param->hp <= 0){
+        return i = 6;
+    }
+    if(param->wh <= 0){
+        return i = 7;
+    }
+    if(param->rw <= 0){
+        return i = 8;
+    }
+    return i;
+}
 
 
 string nats_svg_handle(NatsSuitcase* Suitcase){
@@ -486,7 +514,7 @@ string nats_svg_q_radius(NatsSuitcase* Suitcase){
 }
 
 
-string nats_svg(NatsSuitcase* Suitcase, char c){
+string nats_to_svg(NatsSuitcase* Suitcase, char c){
     string svg;
     svg += "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n";                    //header
     svg += "\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"600\">\n";

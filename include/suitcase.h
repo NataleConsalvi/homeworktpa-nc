@@ -109,7 +109,7 @@ void nats_setextreme(NatsSuitcase* Suitcase);
  *      4 =  extreme low point is out of the file
  *  Return 0 if the position of suitcase is in the limits
 **/
-int nats_controllposition(NatsSuitcase* Suitcase);
+int nats_controlposition(NatsSuitcase* Suitcase);
 
 /**
  * Control if suitcase's dimensions respect the constrains
@@ -121,7 +121,7 @@ int nats_controllposition(NatsSuitcase* Suitcase);
  *      4 =  radius of the wheels is greater than the half of the width of the body
  *  Return 0 if the dimensions of suitcase is in the limits
 **/
-int nats_controlldimension(NatsSuitcase* Suitcase);
+int nats_controldimension(NatsSuitcase* Suitcase);
 
 /**
  * Control if the handle touch the suitcase
@@ -129,9 +129,25 @@ int nats_controlldimension(NatsSuitcase* Suitcase);
  *  Return int about the type of error:
  *      1 =  handle touch the wheel
  *      2 =  handle touch the body
- *  Return 0 if the dimensions of suitcase is in the limits
+ *  Return 0 if the position of handle is in the limits
 **/
-int nats_controllhandle(NatsSuitcase* Suitcase);
+int nats_controlhandle(NatsSuitcase* Suitcase);
+
+/**
+ * Control if the parameters are positive
+ * 
+ *  Return int about the type of error:
+ *      1 =  angle if out of range [0, 360]
+ *      2 =  position x of suitcase is null or negative
+ *      3 =  position y of suitcase is null or negative
+ *      4 =  width of the body is null or negative
+ *      5 =  height of the body is null or negative
+ *      6 =  height of the pole is null or negative
+ *      7 =  width of the handle is null or negative
+ *      8 =  radius of the wheels is null or negative
+ *  Return 0 if the parameters is in the range
+**/
+int nats_controlparameters(NatsParameters* param);
 
 
 /**
@@ -169,7 +185,7 @@ string nats_svg_q_radius(NatsSuitcase* Suitcase);
 /**
  * Function for the construction of complete svg file with header, end and the various part of the suitcase
 **/
-string nats_svg(NatsSuitcase* Suitcase, char c);
+string nats_to_svg(NatsSuitcase* Suitcase, char c);
 
 bool nats_write_file(string svg);
 
