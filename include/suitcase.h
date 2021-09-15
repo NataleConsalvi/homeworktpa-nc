@@ -92,7 +92,13 @@ NatsParameters* nats_init_param();
 **/
 NatsSuitcase* nats_init_device();
 
+/**
+ * Return the coordinate x of the point (float "x", float "y") rotated by an angle "angle"
+**/
 float nats_rotation_x(float x, float y, float angle);
+/**
+ * Return the coordinate y of the point (float "x", float "y") rotated by an angle "angle"
+**/
 float nats_rotation_y(float x, float y, float angle);
 
 /**
