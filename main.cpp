@@ -9,6 +9,7 @@
 using namespace std;
 
 /**
+ * Function that re set the wrong parameters (the parameter that not respect the constraints)
  *      9 =  extreme left point is out of the file
  *      10 =  extreme right point is out of the file
  *      11 =  extreme high point is out of the file
