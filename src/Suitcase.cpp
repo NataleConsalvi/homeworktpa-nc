@@ -114,6 +114,7 @@ void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase){
     Suitcase->wheeldx.x_wheel = x + wb/2;
     Suitcase->wheeldx.y_wheel = y - rw;
     Suitcase->wheeldx.xd_wheel = x + wb/2 + rw;
+    Suitcase->wheeldx.ya_wheel = y - 2*rw;
 
     Suitcase->junction.r_wheel = hp/8;
     Suitcase->junction.x_wheel = x + wb/2;
@@ -136,21 +137,29 @@ void nats_setextreme(NatsSuitcase* Suitcase){
     //Extreme right point beetween extreme right point of junction, extreme right point of handle and extreme right poin of rigth wheel
     if(Suitcase->junction.xd_wheel > Suitcase->wheeldx.xd_wheel){
         edx = Suitcase->junction.xd_wheel;
-        if(edx > Suitcase->handle.xad_handle){
-            
+        if(Suitcase->handle.xas_handle > Suitcase->handle.xad_handle){
+            if(Suitcase->handle.xas_handle > edx){
+                edx = Suitcase->handle.xas_handle;
+            }
         }else{
-            edx = Suitcase->handle.xad_handle;
+            if(Suitcase->handle.xad_handle > edx){
+                edx = Suitcase->handle.xad_handle;
+            }
         }
     }else{
         edx = Suitcase->wheeldx.xd_wheel;
-        if(edx > Suitcase->handle.xad_handle){
-            
+        if(Suitcase->handle.xas_handle > Suitcase->handle.xad_handle){
+            if(Suitcase->handle.xas_handle > edx){
+                edx = Suitcase->handle.xas_handle;
+            }
         }else{
-            edx = Suitcase->handle.xad_handle;
+            if(Suitcase->handle.xad_handle > edx){
+                edx = Suitcase->handle.xad_handle;
+            }
         }
     }
 
-    //Extreme high point beetween extreme hight point of junction, extreme high point of handle (left or right)
+    //Extreme high point beetween extreme high point of junction, extreme high point of handle (left or right)
     if(Suitcase->handle.yad_handle < Suitcase->handle.yas_handle){
         esup = Suitcase->handle.yad_handle;
         if(esup < Suitcase->junction.ya_wheel){
