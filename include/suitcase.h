@@ -97,8 +97,8 @@ NatsSuitcase* nats_init_device();
  * 
  *  Return int about the type of error:
  *      1 =  angle if out of range [0, 360]
- *      2 =  position x of suitcase is null or negative
- *      3 =  position y of suitcase is null or negative
+ *      2 =  position x of suitcase is negative
+ *      3 =  position y of suitcase is negative
  *      4 =  width of the body is null or negative
  *      5 =  height of the body is null or negative
  *      6 =  height of the pole is null or negative
@@ -127,32 +127,15 @@ void nats_setextreme(NatsSuitcase* Suitcase);
  *      10 =  extreme right point is out of the file
  *      11 =  extreme high point is out of the file
  *      12 =  extreme low point is out of the file
- *  Return 0 if the position of suitcase is in the limits
-**/
-int nats_controlposition(NatsSuitcase* Suitcase);
-
-/**
- * Control if suitcase's dimensions respect the constrains
- * 
- *  Return int about the type of error:
  *      13 =  height of the pole is greater than the height of the body
  *      14 =  width of the handle is greater than the width of the body
  *      15 =  width of the pole is greater than the width of the handle
  *      16 =  radius of the wheels is greater than the half of the width of the body
- *  Return 0 if the dimensions of suitcase is in the limits
-**/
-int nats_controldimension(NatsSuitcase* Suitcase);
-
-/**
- * Control if the handle touch the suitcase
- * 
- *  Return int about the type of error:
  *      17 =  handle touch the wheel
  *      18 =  handle touch the body
- *  Return 0 if the position of handle is in the limits
+ *  Return 0 if all parts of suitcase is in the limits
 **/
-int nats_controlhandle(NatsSuitcase* Suitcase);
-
+int nats_control_suitcase(NatsSuitcase* Suitcase);
 
 
 /**
