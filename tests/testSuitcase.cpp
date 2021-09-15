@@ -55,7 +55,6 @@ TEST_CASE("Test 3: nats_control_parameters (it should return a int for each type
     REQUIRE(a == 0); //There are not wrong parameters!
 
     delete param;
-
 }
 
 //Test 4: nats_set_parameters
@@ -89,11 +88,10 @@ TEST_CASE("Test 4: nats_set_parameters (it should set all device's parameters fr
 
     delete param;
     delete device;
-
 }
 
 
-//Test 5: nats_setextreme
+//Test 5.1: nats_setextreme (extreme high point)
 TEST_CASE("Test 5.1: nats_setextreme (it should set the extreme points of the suitcase in various situations)", "[suitcase]") {
 
     NatsParameters* param = nats_init_param();
@@ -108,7 +106,6 @@ TEST_CASE("Test 5.1: nats_setextreme (it should set the extreme points of the su
     param->wh = 40;
     param->rw = 20;
     param->angle= 45;
-
     nats_setparameters(param, device);
     nats_setextreme(device);
 
@@ -118,17 +115,136 @@ TEST_CASE("Test 5.1: nats_setextreme (it should set the extreme points of the su
 
     //Case 2: the extreme high point is the high RIGHT point of the handle
     param->angle = 320;
-
     nats_setparameters(param, device);
     nats_setextreme(device);
 
     REQUIRE((device->y_esup - device->handle.yad_handle) <= 0.0001);
     REQUIRE((device->y_esup - 138.07467) <= 0.0001);
 
+
+    //Case 3: the extreme high point is the high point of the junction
+    param->angle = 160;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+
+    REQUIRE(device->y_esup - device->junction.ya_wheel <= 0.0001);
+    REQUIRE(device->y_esup - 217.5 <= 0.0001);
+
     delete param;
     delete device;
 }
 
+//Test 5.2: nats_setextreme (extreme low point)
+TEST_CASE("Test 5.2: nats_setextreme (it should set the extreme points of the suitcase in various situations)", "[suitcase]") {
+
+    NatsParameters* param = nats_init_param();
+    NatsSuitcase* device = nats_init_device();
+
+    //The extreme low point is the extreme low point of the wheels
+    param->x = 400;
+    param->y = 500;
+    param->wb = 150;
+    param->hb = 250;
+    param->hp = 200;
+    param->wh = 140;
+    param->rw = 20;
+    param->angle= 155;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+
+    REQUIRE((device->y_einf - device->y_suitcase) <= 0.0001);
+    REQUIRE((device->y_einf - 500) <= 0.0001);
+
+    delete param;
+    delete device;
+}
+
+//Test 5.3: nats_setextreme (extreme left point)
+TEST_CASE("Test 5.3: nats_setextreme (it should set the extreme points of the suitcase in various situations)", "[suitcase]") {
+
+    NatsParameters* param = nats_init_param();
+    NatsSuitcase* device = nats_init_device();
+
+    //Case 1: the extreme left point is the extreme left point of the left wheel
+    param->x = 400;
+    param->y = 500;
+    param->wb = 200;
+    param->hb = 250;
+    param->hp = 150;
+    param->wh = 100;
+    param->rw = 40;
+    param->angle= 300;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+
+    REQUIRE((device->x_esx - device->wheelsx.xs_wheel) <= 0.0001);
+    REQUIRE((device->x_esx - 260) <= 0.0001);
+
+    //Case 2: the extreme left point is the extreme left point of the handle
+    param->rw = 20;
+    param->hp = 200;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+
+    REQUIRE((device->x_esx - device->handle.xas_handle) <= 0.0001);
+    REQUIRE((device->x_esx - 267.15390) <= 0.0001);
+
+    delete param;
+    delete device;
+}
+
+//Test 5.4: nats_setextreme (extreme right point)
+TEST_CASE("Test 5.4: nats_setextreme (it should set the extreme points of the suitcase in various situations)", "[suitcase]") {
+
+    NatsParameters* param = nats_init_param();
+    NatsSuitcase* device = nats_init_device();
+
+    //Case 1: the extreme right point is the extreme right point of the left wheel
+    param->x = 400;
+    param->y = 500;
+    param->wb = 200;
+    param->hb = 250;
+    param->hp = 150;
+    param->wh = 100;
+    param->rw = 40;
+    param->angle= 300;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+
+    REQUIRE((device->x_edx - device->wheeldx.xd_wheel) <= 0.0001);
+    REQUIRE((device->x_edx - 540) <= 0.0001);
+    
+    //Case 2: the extreme right point is the extreme right point of the junction
+    param->rw = 20;
+    param->hp = 200;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+
+    REQUIRE((device->x_edx - device->junction.xd_wheel) <= 0.0001);
+    REQUIRE((device->x_edx - 525) <= 0.0001);
+
+    //Case 3: the extreme right point is the extreme right point of the handle
+    param->rw = 40;
+    param->hp = 200;
+    param->angle = 45;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+
+    REQUIRE((device->x_edx - device->handle.xad_handle) <= 0.0001);
+    REQUIRE((device->x_edx - 705.06097) <= 0.0001);
+
+    //Case 4: the extreme right point is the extreme left point of the handle
+    param->angle = 120;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+
+    REQUIRE((device->x_edx - device->handle.xas_handle) <= 0.0001);
+    REQUIRE((device->x_edx - 732.84609) <= 0.0001);
+
+
+    delete param;
+    delete device;
+}
 
    /* test
     string total = nats_read_from_file();

@@ -120,6 +120,7 @@ void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase){
     Suitcase->junction.x_wheel = x + wb/2;
     Suitcase->junction.y_wheel = y - rw - hb;
     Suitcase->junction.ya_wheel = y - rw - hb - hp/8;
+    Suitcase->junction.xd_wheel = x + wb/2 + hp/8;
 
 }
 
@@ -134,7 +135,7 @@ void nats_setextreme(NatsSuitcase* Suitcase){
         esx = Suitcase->handle.xas_handle;
     }
 
-    //Extreme right point beetween extreme right point of junction, extreme right point of handle and extreme right poin of rigth wheel
+    //Extreme right point beetween extreme right point of junction, extreme right point of handle and extreme right point of right wheel
     if(Suitcase->junction.xd_wheel > Suitcase->wheeldx.xd_wheel){
         edx = Suitcase->junction.xd_wheel;
         if(Suitcase->handle.xas_handle > Suitcase->handle.xad_handle){
