@@ -408,6 +408,9 @@ int main() {
 
         std::cout << t << endl;
 
+        delete param;
+        delete device;
+
     }else{
 
 
@@ -429,6 +432,9 @@ int main() {
         bool t2 = nats_write_file(s2, nome2);
 
         std::cout << t2 << endl;
+
+        delete param2;
+        delete device2;
     }    
 
 }
