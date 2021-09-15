@@ -22,10 +22,19 @@ NatsSuitcase* nats_init_device(){
     return device;
 }
 
+float nats_rotation_x(float x, float y, float angle){
+
+    return (x*cos(angle) + y*sin(angle));
+}
+
+float nats_rotation_y(float x, float y, float angle){
+
+    return (- x*sin(angle) + y*cos(angle));
+}
+
 int nats_controlparameters(NatsParameters* param){
     int i = 0;
     if(param->angle < 0 || param->angle>360){
-        //nats_handling_parameters(1, param);
         return i = 1;
     }
     if(param->x < 0){
@@ -49,7 +58,7 @@ int nats_controlparameters(NatsParameters* param){
     if(param->rw <= 0){
         return i = 8;
     }
-    return i;
+    return i = 0;
 }
 
 
@@ -63,6 +72,7 @@ void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase){
     float wh = param->wh;
     float rw = param->rw;
     float angle = param->angle;
+
 
     Suitcase->x_suitcase = x;
     Suitcase->y_suitcase = y;
@@ -78,19 +88,21 @@ void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase){
 
     Suitcase->pole.w_pole = hp/5;           //default
     Suitcase->pole.h_pole = hp;
-    Suitcase->pole.xas_pole = x + (wb/2) - (hp/10) + (hp * sin(anglerad));
-    Suitcase->pole.yas_pole = y - rw - hb - hp + (hp * (1 - cos(anglerad)));
+
+    Suitcase->pole.xas_pole = x + (wb/2) + nats_rotation_x(-hp/10, hp, anglerad);
+    Suitcase->pole.yas_pole = y -rw -hb - nats_rotation_y(-hp/10, hp, anglerad);
 
     Suitcase->handle.w_handle = wh;
     Suitcase->handle.h_handle = hp/5;       //default
-    Suitcase->handle.xas_handle = x + wb/2 - wh/2 + ((hp + hp/5) * sin(anglerad));
-    Suitcase->handle.yas_handle = y - rw - hb - hp - hp/5 + ((hp + hp/5) * (1 - cos(anglerad)));
-    Suitcase->handle.xad_handle = x + wb/2 + wh/2 + ((hp + hp/5) * sin(anglerad));
-    Suitcase->handle.yad_handle = y - rw - hb - hp - hp/5 + ((hp + hp/5) * (1 - cos(anglerad))) - wh*sin(anglerad);
-    Suitcase->handle.xbs_handle = x + wb/2 - wh/2 + ((hp) * sin(anglerad));
-    Suitcase->handle.ybs_handle = y - rw - hb - hp + ((hp) * (1 - cos(anglerad)));
-    Suitcase->handle.xbd_handle = x + wb/2 + wh/2 + ((hp) * sin(anglerad));
-    Suitcase->handle.ybd_handle = y - rw - hb - hp + ((hp) * (1 - cos(anglerad)));
+
+    Suitcase->handle.xas_handle = x + (wb/2) + nats_rotation_x(-wh/2, hp + hp/5, anglerad);
+    Suitcase->handle.yas_handle = y -rw -hb - nats_rotation_y(-wh/2, hp + hp/5, anglerad);
+    Suitcase->handle.xad_handle = x + (wb/2) + nats_rotation_x(wh/2, hp + hp/5, anglerad);
+    Suitcase->handle.yad_handle = y -rw -hb - nats_rotation_y(wh/2, hp + hp/5, anglerad);
+    Suitcase->handle.xbs_handle = x + (wb/2) + nats_rotation_x(-wh/2, hp, anglerad);
+    Suitcase->handle.ybs_handle = y -rw -hb - nats_rotation_y(-wh/2, hp, anglerad);
+    Suitcase->handle.xbd_handle = x + (wb/2) + nats_rotation_x(wh/2, hp, anglerad);
+    Suitcase->handle.ybd_handle = y -rw -hb - nats_rotation_y(wh/2, hp, anglerad);
 
     Suitcase->wheelsx.r_wheel = rw;
     Suitcase->wheelsx.x_wheel = x - wb/2;
@@ -230,8 +242,9 @@ int nats_control_suitcase(NatsSuitcase* Suitcase){
 
 
 string nats_svg_handle(NatsSuitcase* Suitcase){
-    float xas_norotation = (Suitcase->handle.xas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.h_handle) * sin((Suitcase->angle)*M_PI/180));
-    float yas_norotation = (Suitcase->handle.yas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.h_handle) * (1 - cos((Suitcase->angle)*M_PI/180)));
+
+    float xas_norotation = Suitcase->x_suitcase + (Suitcase->body.w_body /2) - (Suitcase->handle.w_handle/2);
+    float yas_norotation = Suitcase->y_suitcase - Suitcase->wheeldx.r_wheel - Suitcase->body.h_body - Suitcase->pole.h_pole - (Suitcase->pole.h_pole /5);
     string handle;
     handle += "  <rect  x=\"";
     handle += to_string(xas_norotation);
@@ -246,8 +259,8 @@ string nats_svg_handle(NatsSuitcase* Suitcase){
 }
 
 string nats_svg_pole(NatsSuitcase* Suitcase){
-    float xas_norotation = (Suitcase->pole.xas_pole) - ((Suitcase->pole.h_pole)*sin((Suitcase->angle)*M_PI/180));
-    float yas_norotation = (Suitcase->pole.yas_pole) - ((Suitcase->pole.h_pole)*(1 - cos((Suitcase->angle)*M_PI/180)));
+    float xas_norotation = Suitcase->x_suitcase + (Suitcase->body.w_body/2) - (Suitcase->pole.h_pole/10);
+    float yas_norotation = Suitcase->y_suitcase - Suitcase->wheeldx.r_wheel - Suitcase->body.h_body - Suitcase->pole.h_pole;
     string pole;
     pole += "  <rect  x=\"";
     pole += to_string(xas_norotation);
@@ -332,8 +345,8 @@ string nats_svg_rotation(NatsSuitcase* Suitcase){
 
 string nats_svg_q_handle(NatsSuitcase* Suitcase){
     //text + dimension of handle
-        float xas_norotation = (Suitcase->handle.xas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.h_handle) * sin((Suitcase->angle)*M_PI/180));
-        float yas_norotation = (Suitcase->handle.yas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.h_handle) * (1 - cos((Suitcase->angle)*M_PI/180)));
+        float xas_norotation = Suitcase->x_suitcase + (Suitcase->body.w_body /2) - (Suitcase->handle.w_handle/2);
+        float yas_norotation = Suitcase->y_suitcase - Suitcase->wheeldx.r_wheel - Suitcase->body.h_body - Suitcase->pole.h_pole - (Suitcase->pole.h_pole /5);
 
         string testo;
         testo += "\n  <text  x=\"";
@@ -365,8 +378,8 @@ string nats_svg_q_handle(NatsSuitcase* Suitcase){
 string nats_svg_q_pole(NatsSuitcase* Suitcase){
     //text + dimension of pole
         string testo;
-        float xas_norotation = (Suitcase->pole.xas_pole) - ((Suitcase->pole.h_pole)*sin((Suitcase->angle)*M_PI/180));
-        float yas_norotation = (Suitcase->pole.yas_pole) - ((Suitcase->pole.h_pole)*(1 - cos((Suitcase->angle)*M_PI/180)));
+        float xas_norotation = Suitcase->x_suitcase + (Suitcase->body.w_body/2) - (Suitcase->pole.h_pole/10);
+        float yas_norotation = Suitcase->y_suitcase - Suitcase->wheeldx.r_wheel - Suitcase->body.h_body - Suitcase->pole.h_pole;
     if(Suitcase->angle >= 270){
         
         testo += "\n  <text  x=\"";

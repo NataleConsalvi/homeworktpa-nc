@@ -92,6 +92,9 @@ NatsParameters* nats_init_param();
 **/
 NatsSuitcase* nats_init_device();
 
+float nats_rotation_x(float x, float y, float angle);
+float nats_rotation_y(float x, float y, float angle);
+
 /**
  * Control if the parameters are positive
  * 
