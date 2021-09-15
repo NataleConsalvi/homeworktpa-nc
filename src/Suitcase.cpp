@@ -53,13 +53,6 @@ int nats_controlparameters(NatsParameters* param){
 }
 
 
-/*
-void nats_handling_parameters(int i, NatsParameters* param){
-
-}
-*/
-
-
 void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase){
     
     float x = param->x;
@@ -90,10 +83,10 @@ void nats_setparameters(NatsParameters* param, NatsSuitcase* Suitcase){
 
     Suitcase->handle.w_handle = wh;
     Suitcase->handle.h_handle = hp/5;       //default
-    Suitcase->handle.xas_handle = x + wb/2 - wh/2 + ((hp + wh) * sin(anglerad));
-    Suitcase->handle.yas_handle = y - rw - hb - hp - hp/5 + ((hp + wh) * (1 - cos(anglerad)));
-    Suitcase->handle.xad_handle = x + wb/2 + wh/2 + ((hp + wh) * sin(anglerad));
-    Suitcase->handle.yad_handle = y - rw - hb - hp - hp/5 + ((hp + wh) * (1 - cos(anglerad)));
+    Suitcase->handle.xas_handle = x + wb/2 - wh/2 + ((hp + hp/5) * sin(anglerad));
+    Suitcase->handle.yas_handle = y - rw - hb - hp - hp/5 + ((hp + hp/5) * (1 - cos(anglerad)));
+    Suitcase->handle.xad_handle = x + wb/2 + wh/2 + ((hp + hp/5) * sin(anglerad));
+    Suitcase->handle.yad_handle = y - rw - hb - hp - hp/5 + ((hp + hp/5) * (1 - cos(anglerad))) - wh*sin(anglerad);
     Suitcase->handle.xbs_handle = x + wb/2 - wh/2 + ((hp) * sin(anglerad));
     Suitcase->handle.ybs_handle = y - rw - hb - hp + ((hp) * (1 - cos(anglerad)));
     Suitcase->handle.xbd_handle = x + wb/2 + wh/2 + ((hp) * sin(anglerad));
@@ -176,79 +169,69 @@ void nats_setextreme(NatsSuitcase* Suitcase){
 }
 
 
-int nats_controlposition(NatsSuitcase* Suitcase){
+int nats_control_suitcase(NatsSuitcase* Suitcase){
     int i = 0;
-    if(Suitcase->x_esx < 0){
-        return i = 9;
-    }else{
-        if(Suitcase->x_edx > 800){
-            return i = 10;
+    //control position
+        if(Suitcase->x_esx < 0){
+            return i = 9;
         }else{
-            if(Suitcase->y_esup < 0){
-                return i = 11;
+            if(Suitcase->x_edx > 800){
+                return i = 10;
             }else{
-                if(Suitcase->y_einf > 600){
-                    return i = 12;
+                if(Suitcase->y_esup < 0){
+                    return i = 11;
                 }else{
-                    return i = 0;
+                    if(Suitcase->y_einf > 600){
+                        return i = 12;
+                    }
                 }
             }
         }
-    }
-}
-
-int nats_controldimension(NatsSuitcase* Suitcase){
-    int i = 0;
-
-    if((Suitcase->pole.h_pole + Suitcase->handle.h_handle) > Suitcase->body.h_body){
-        return i = 13;
-    }else{
-        if(Suitcase->handle.w_handle > Suitcase->body.w_body){
-            return i = 14;
+    //control dimensions
+        if((Suitcase->pole.h_pole + Suitcase->handle.h_handle) > Suitcase->body.h_body){
+            return i = 13;
         }else{
-            if(Suitcase->pole.w_pole > Suitcase->handle.w_handle){
-                return i = 15;
+            if(Suitcase->handle.w_handle > Suitcase->body.w_body){
+                return i = 14;
             }else{
-                if(Suitcase->wheelsx.r_wheel > (Suitcase->body.w_body / 2)){
-                    return i = 16;
+                if(Suitcase->pole.w_pole > Suitcase->handle.w_handle){
+                    return i = 15;
                 }else{
-                    return i = 0;
+                    if(Suitcase->wheelsx.r_wheel > (Suitcase->body.w_body / 2)){
+                        return i = 16;
+                    }
                 }
             }
         }
-    }
-}
+    //control handle
+        if(Suitcase->angle <= 180){
 
-int nats_controlhandle(NatsSuitcase* Suitcase){
-    int i = 0;
-    if(Suitcase->angle <= 180){
-
-        if(Suitcase->handle.ybd_handle > Suitcase->wheeldx.ya_wheel){
-            if(Suitcase->handle.xbd_handle < Suitcase->wheeldx.xd_wheel){
-                return i = 17;
+            if(Suitcase->handle.ybd_handle > Suitcase->wheeldx.ya_wheel){
+                if(Suitcase->handle.xbd_handle < Suitcase->wheeldx.xd_wheel){
+                    return i = 17;
+                }
+            }else{
+                if(Suitcase->handle.xbd_handle < Suitcase->body.xad_body){
+                    return i = 18;
+                }
+                if(Suitcase->handle.xad_handle < Suitcase->wheeldx.xd_wheel){
+                    return i = 17;
+                }
             }
+
         }else{
-            if(Suitcase->handle.xbd_handle < Suitcase->body.xad_body){
+            if(Suitcase->handle.ybs_handle > Suitcase->body.yad_body){
                 return i = 18;
             }
-            if(Suitcase->handle.xad_handle < Suitcase->wheeldx.xd_wheel){
-                return i = 17;
-            }
-        }
 
-    }else{
-        if(Suitcase->handle.ybs_handle > Suitcase->body.yad_body){
-            return i = 18;
         }
-
-    }
     return i = 0;
 }
 
 
 string nats_svg_handle(NatsSuitcase* Suitcase){
-    float xas_norotation = (Suitcase->handle.xas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.w_handle) * sin((Suitcase->angle)*M_PI/180));
-    float yas_norotation = (Suitcase->handle.yas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.w_handle) * (1 - cos((Suitcase->angle)*M_PI/180)));
+    float xas_norotation = (Suitcase->handle.xas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.h_handle) * sin((Suitcase->angle)*M_PI/180));
+    float yas_norotation = (Suitcase->handle.yas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.h_handle) * (1 - cos((Suitcase->angle)*M_PI/180)));
     string handle;
     handle += "  <rect  x=\"";
     handle += to_string(xas_norotation);
@@ -349,8 +332,8 @@ string nats_svg_rotation(NatsSuitcase* Suitcase){
 
 string nats_svg_q_handle(NatsSuitcase* Suitcase){
     //text + dimension of handle
-        float xas_norotation = (Suitcase->handle.xas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.w_handle) * sin((Suitcase->angle)*M_PI/180));
-        float yas_norotation = (Suitcase->handle.yas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.w_handle) * (1 - cos((Suitcase->angle)*M_PI/180)));
+        float xas_norotation = (Suitcase->handle.xas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.h_handle) * sin((Suitcase->angle)*M_PI/180));
+        float yas_norotation = (Suitcase->handle.yas_handle) - ((Suitcase->pole.h_pole + Suitcase->handle.h_handle) * (1 - cos((Suitcase->angle)*M_PI/180)));
 
         string testo;
         testo += "\n  <text  x=\"";
@@ -381,10 +364,39 @@ string nats_svg_q_handle(NatsSuitcase* Suitcase){
 
 string nats_svg_q_pole(NatsSuitcase* Suitcase){
     //text + dimension of pole
+        string testo;
         float xas_norotation = (Suitcase->pole.xas_pole) - ((Suitcase->pole.h_pole)*sin((Suitcase->angle)*M_PI/180));
         float yas_norotation = (Suitcase->pole.yas_pole) - ((Suitcase->pole.h_pole)*(1 - cos((Suitcase->angle)*M_PI/180)));
+    if(Suitcase->angle >= 270){
+        
+        testo += "\n  <text  x=\"";
+        testo += to_string(xas_norotation + Suitcase->pole.w_pole  + 30);
+        testo += "\" y=\"";
+        testo += to_string(yas_norotation + Suitcase->pole.h_pole/2);
+        testo += "\" fill='black' dominant-baseline='middle' text-anchor='middle'";
+        testo += " transform =\"rotate(90,";
+        testo += to_string(xas_norotation + Suitcase->pole.w_pole  + 30);
+        testo += ",";
+        testo += to_string(yas_norotation + Suitcase->pole.h_pole/2);
+        testo += ")\">";
 
-        string testo;
+        string prova = to_string(Suitcase->pole.h_pole);
+        prova.resize(5);
+
+        testo += prova;
+        testo += "</text>\n";
+
+        testo += "  <rect  x=\"";
+        testo += to_string(xas_norotation + Suitcase->pole.w_pole  + 20);
+        testo += "\" y=\"";
+        testo += to_string(yas_norotation);
+        testo += "\" width=\"";
+        testo += to_string(3);
+        testo +="\" height=\"";
+        testo += to_string(Suitcase->pole.h_pole);
+        testo += "\" style=\"stroke-width:0;stroke:rgb(200,200,200)\" />  \n";
+    }else{
+
         testo += "\n  <text  x=\"";
         testo += to_string(xas_norotation  - 30);
         testo += "\" y=\"";
@@ -412,6 +424,7 @@ string nats_svg_q_pole(NatsSuitcase* Suitcase){
         testo += to_string(Suitcase->pole.h_pole);
         testo += "\" style=\"stroke-width:0;stroke:rgb(200,200,200)\" />  \n";
 
+    }
     return testo;
 
 }
@@ -559,15 +572,10 @@ string nats_to_svg(NatsSuitcase* Suitcase, char c){
 
 }
 
-bool nats_write_file(string svg){
+bool nats_write_file(string svg, string name){
 
     if(svg != ""){
-        string nome;
-
-        cout << "Scrivere il nome del file (es: nomefile.svg)" << endl;
-        cin >> nome;
-
-        ofstream MyFile(nome);                                              // Create and open a text file
+        ofstream MyFile(name);                                              // Create and open a text file
         string string_to_write = svg;
         MyFile << string_to_write;                                          // Write to the file
         MyFile.close();                                                     // Close the file
