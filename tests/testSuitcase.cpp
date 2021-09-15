@@ -83,8 +83,8 @@ TEST_CASE("Test 4: nats_set_parameters (it should set all device's parameters fr
     REQUIRE(device->junction.x_wheel == device->body.xad_body);     //Correct position of the center of the junction (in the extreme high left point of the body)
     REQUIRE(device->wheelsx.x_wheel == (400 - 200/2));              //Correct position of the center of the left wheel (in the extreme low left point of the body)
 
-    REQUIRE((device->pole.xas_pole - 560.71067) <= 0.0001);         //Calculation with trigonometric function corrected with an approximation of 0.01%
-    REQUIRE((device->handle.xas_handle -564.85281) <= 0.0001);
+    REQUIRE((device->pole.xas_pole - 563.63961) <= 0.0001);         //Calculation with trigonometric function corrected with an approximation of 0.01%
+    REQUIRE((device->handle.xas_handle -570.71068) <= 0.0001);
 
 
     delete param;
