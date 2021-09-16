@@ -25,6 +25,7 @@ TEST_CASE("Test 2: nats_init_device (it should initialize a new device)", "[suit
 //Test 3: nats_control_parameters
 TEST_CASE("Test 3: nats_control_parameters (it should return a int for each type of error in a set of parameters)"){
 
+
     NatsParameters* param = nats_init_param();
 
     param->x = -3;
