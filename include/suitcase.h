@@ -106,13 +106,13 @@ float nats_rotation_y(float x, float y, float angle);
  * 
  *  Return int about the type of error:
  *      1 =  angle if out of range [0, 360]
- *      2 =  position x of suitcase is negative
- *      3 =  position y of suitcase is negative
- *      4 =  width of the body is null or negative
- *      5 =  height of the body is null or negative
- *      6 =  height of the pole is null or negative
- *      7 =  width of the handle is null or negative
- *      8 =  radius of the wheels is null or negative
+ *      2 =  position x of suitcase is negative or > 800
+ *      3 =  position y of suitcase is negative or > 600
+ *      4 =  width of the body is null or negative or > 800
+ *      5 =  height of the body is null or negative or > 600
+ *      6 =  height of the pole is null or negative or > 600
+ *      7 =  width of the handle is null or negative or > 800
+ *      8 =  radius of the wheels is null or negative or > 600
  *  Return 0 if the parameters is in the range
 **/
 int nats_controlparameters(NatsParameters* param);

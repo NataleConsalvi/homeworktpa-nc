@@ -28,7 +28,7 @@ TEST_CASE("Test 3: nats_control_parameters (it should return a int for each type
 
     NatsParameters* param = nats_init_param();
 
-    param->x = -3;
+    param->x = 801;
 
     param->y = 500;
     param->wb = 200;

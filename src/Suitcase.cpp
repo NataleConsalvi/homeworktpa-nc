@@ -37,25 +37,25 @@ int nats_controlparameters(NatsParameters* param){
     if(param->angle < 0 || param->angle>360){
         return i = 1;
     }
-    if(param->x < 0){
+    if(param->x < 0 || param->x > 800){
         return i = 2;
     }
-    if(param->y < 0){
+    if(param->y < 0 || param->y > 600){
         return i = 3;
     }
-    if(param->wb <= 0){
+    if(param->wb <= 0 || param->wb > 800){
         return i = 4;
     }
-    if(param->hb <= 0){
+    if(param->hb <= 0 || param->hb > 600){
         return i = 5;
     }
-    if(param->hp <= 0){
+    if(param->hp <= 0 || param->hp > 600){
         return i = 6;
     }
-    if(param->wh <= 0){
+    if(param->wh <= 0 || param->wh > 800){
         return i = 7;
     }
-    if(param->rw <= 0){
+    if(param->rw <= 0 || param->rw > 600){
         return i = 8;
     }
     return i = 0;

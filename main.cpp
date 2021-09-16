@@ -161,25 +161,25 @@ void nats_stamp_error(int i){
             cout << "Error: angle if out of range [0, 360]" << endl;
             break;
         case 2:
-            cout << "Error: position x of suitcase is null or negative" << endl;
+            cout << "Error: position x of suitcase is negative or > 800" << endl;
             break;
         case 3:
-            cout << "Error: position y of suitcase is null or negative" << endl;
+            cout << "Error: position y of suitcase is negative or > 600" << endl;
             break;
         case 4:
-            cout << "Error: width of the body is null or negative" << endl;
+            cout << "Error: width of the body is null or negative or > 800" << endl;
             break;
         case 5:
-            cout << "Error: height of the body is null or negative" << endl;
+            cout << "Error: height of the body is null or negative or > 600" << endl;
             break;
         case 6:
-            cout << "Error: height of the pole is null or negative" << endl;
+            cout << "Error: height of the pole is null or negative or > 600" << endl;
             break;
         case 7:
-            cout << "Error: width of the handle is null or negative" << endl;
+            cout << "Error: width of the handle is null or negative or > 800" << endl;
             break;
         case 8:
-            cout << "Error: radius of the wheels is null or negative" << endl;
+            cout << "Error: radius of the wheels is null or negative or > 600" << endl;
             break;
         case 9:
             cout << "Error: extreme left point is out of the file" << endl;
