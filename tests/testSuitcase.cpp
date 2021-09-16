@@ -246,9 +246,128 @@ TEST_CASE("Test 5.4: nats_setextreme (it should set the extreme points of the su
     delete device;
 }
 
-   /* test
-    string total = nats_read_from_file();
-    int a = 0;
-    float b = nats_parse(total, "rotate(", ", ", a);
-    cout << b << endl;
-   */
+//Test 6.1: nats_control_suitcase
+TEST_CASE("Test 6.1: nats_control_suitcase (it should return a int for each type of error)"){
+
+    NatsParameters* param = nats_init_param();
+    NatsSuitcase* device = nats_init_device();
+
+    //Case 1: extreme left point is out of the file
+    param->x = 100;
+    param->y = 500;
+    param->wb = 200;
+    param->hb = 250;
+    param->hp = 200;
+    param->wh = 80;
+    param->rw = 30;
+    param->angle= 45;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+    int i = nats_control_suitcase(device);
+
+    REQUIRE(i == 9);
+
+    //Case 2: extreme right point is out of the file
+    param->x = 700;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+    i = nats_control_suitcase(device);
+
+    REQUIRE(i == 10);
+
+    //Case 3: extreme high point is out of the file
+    param->x = 400;
+    param->angle = 0;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+    i = nats_control_suitcase(device);
+
+    REQUIRE(i == 11);
+
+    delete param;
+    delete device;
+}
+
+//Test 6.2: nats_control_suitcase
+TEST_CASE("Test 6.2: nats_control_suitcase (it should return a int for each type of error)"){
+
+    NatsParameters* param = nats_init_param();
+    NatsSuitcase* device = nats_init_device();
+
+    //Case 1: height of the pole and handle is greater than the height of the body
+    param->x = 400;
+    param->y = 500;
+    param->wb = 200;
+    param->hb = 250;
+    param->hp = 210;
+    param->wh = 80;
+    param->rw = 30;
+    param->angle= 45;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+    int i = nats_control_suitcase(device);
+
+    REQUIRE(i == 13);
+
+    //Case 2: width of the handle is greater than the width of the body
+    param->hp = 100;
+    param->wh = 210;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+    i = nats_control_suitcase(device);
+
+    REQUIRE(i == 14);
+
+    //Case 3: width of the pole is greater than the width of the handle
+    param->wh = 10;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+    i = nats_control_suitcase(device);
+
+    REQUIRE(i == 15);
+
+    //Case 4: radius of the wheels is greater than the half of the width of the body
+    param->wh = 80;
+    param->rw = 101;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+    i = nats_control_suitcase(device);
+
+    REQUIRE(i == 16);
+    
+    delete param;
+    delete device;
+}
+
+//Test 6.3: nats_control_suitcase
+TEST_CASE("Test 6.3: nats_control_suitcase (it should return a int for each type of error)"){
+
+    NatsParameters* param = nats_init_param();
+    NatsSuitcase* device = nats_init_device();
+
+    //Case 1: handle touch the wheel
+    param->x = 400;
+    param->y = 500;
+    param->wb = 200;
+    param->hb = 250;
+    param->hp = 200;
+    param->wh = 80;
+    param->rw = 40;
+    param->angle= 165;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+    int i = nats_control_suitcase(device);
+
+    REQUIRE(i == 17);
+
+    //Case 2:handle touch the body
+    param->angle = 280;
+    nats_setparameters(param, device);
+    nats_setextreme(device);
+    i = nats_control_suitcase(device);
+
+    REQUIRE(i == 18);
+    
+    delete param;
+    delete device;
+}

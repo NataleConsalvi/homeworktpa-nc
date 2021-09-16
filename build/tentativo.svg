@@ -2,9 +2,9 @@
 
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600">
   
-  <g transform = "rotate(120.000000, 500.000000, 210.000000)">
+  <g transform = "rotate(150.000000, 500.000000, 210.000000)">
   
-  <rect  x="450.000000" y="-30.000000" width="100.000000" height="40.000000" style="fill:rgb(200,200,0);stroke-width:3;stroke:rgb(0,0,0)" />  
+  <rect  x="460.000000" y="-30.000000" width="80.000000" height="40.000000" style="fill:rgb(200,200,0);stroke-width:3;stroke:rgb(0,0,0)" />  
   
   <rect  x="480.000000" y="10.000000" width="40.000000" height="200.000000" style="fill:rgb(200,200,200);stroke-width:3;stroke:rgb(0,0,0)" />    
   </g>  

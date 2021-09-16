@@ -14,7 +14,7 @@ using namespace std;
  *      10 =  extreme right point is out of the file
  *      11 =  extreme high point is out of the file
  *      12 =  extreme low point is out of the file
- *      13 =  height of the pole is greater than the height of the body
+ *      13 =  height of the pole and handle is greater than the height of the body
  *      14 =  width of the handle is greater than the width of the body
  *      15 =  width of the pole is greater than the width of the handle
  *      16 =  radius of the wheels is greater than the half of the width of the body
