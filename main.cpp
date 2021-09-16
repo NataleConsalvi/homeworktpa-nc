@@ -373,19 +373,17 @@ int main() {
         NatsParameters* param = nats_init_param();
         NatsSuitcase* device = nats_init_device();
 
-        int i, j, k;
+        int i;
 
         nats_enter_parameters(param);
         nats_setparameters(param, device);
         nats_setextreme(device);
         do{
-            //nats_setextreme(device);
             i = nats_control_suitcase(device);
-            //j = ;
             nats_stamp_error(i);
             nats_re_set_parameters(i, param, device);
 
-        }while(i != 0 && j != 0);
+        }while(i != 0);
 
         char quote;
         do{
@@ -423,6 +421,24 @@ int main() {
         NatsSuitcase* device2 = nats_init_device();
 
         nats_setparameters(param2, device2);
+        nats_setextreme(device2);
+        int i;
+        do{
+            i = nats_control_suitcase(device2);
+            nats_stamp_error(i);
+            nats_re_set_parameters(i, param2, device2);
+
+        }while(i != 0);
+
+        char quote;
+        do{
+            cout << "Enter the dimension? [Y = yes || N = no] ";
+            cin >> quote;
+            if(quote != 'Y' && quote != 'N'){
+                cout << "Wrong character!" << endl;
+            }
+
+        }while(quote != 'Y' && quote != 'N');
 
         string s2 = nats_to_svg(device2, 'Y');
 
